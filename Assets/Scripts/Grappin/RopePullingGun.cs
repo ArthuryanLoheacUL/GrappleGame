@@ -66,6 +66,8 @@ public class RopePullingGun : MonoBehaviour
                 strightLine = true;
                 if (pullingGun.isGrappedToNothing)
                     pullingGun.UnGrapple();
+                else
+                    CineShakeManager.instance.Shake(0.1f, 1.5f);
             }
             else
             {

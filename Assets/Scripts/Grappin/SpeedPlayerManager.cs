@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class SpeedPlayerManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private Light2D lightBall;
 
     [SerializeField] private Color underSpeedColor;
     [SerializeField] private Color speedColor;
@@ -107,10 +109,12 @@ public class SpeedPlayerManager : MonoBehaviour
         if (stateSpeed == StateSpeed.Slow)
         {
             trailRenderer.enabled = false;
+            lightBall.enabled = false;
         }
         else
         {
             trailRenderer.enabled = true;
+            lightBall.enabled = true;
             if (stateSpeed == StateSpeed.Normal)
             {
                 float _t = rb.linearVelocity.magnitude - speedThreshold / maxSpeedColorThreshold - speedThreshold;
@@ -128,6 +132,7 @@ public class SpeedPlayerManager : MonoBehaviour
     void SetColor(Color _color)
     {
         spriteRenderer.color = _color;
+        lightBall.color = _color;
         _color.a = trailRenderer.startColor.a;
         trailRenderer.startColor = _color;
         _color.a = trailRenderer.endColor.a;
