@@ -1,3 +1,4 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -16,18 +17,21 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] private LayerMask layers;
     [SerializeField] private float maxDistance = 50.0f;
     [SerializeField] private float distanceRelease = 5f;
-    [SerializeField] private float pullForce;
     [SerializeField] private KeyCode key;
+    private SpringJoint2D joint;
 
     [Header("Private Params & States:")]
     [HideInInspector] public Vector2 grappledPoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
     private bool isGrappled;
     [HideInInspector] public bool isGrappedToNothing;
-    private bool isPulling;
+
+    [SerializeField] private float ropeShrinkSpeed = 10f;
 
     void Start()
     {
+        joint = gameObject.AddComponent<SpringJoint2D>();
+        joint.enabled = false;  
         cam = Camera.main;
         UnGrapple();
     }
@@ -61,17 +65,18 @@ public class GrapplingGun : MonoBehaviour
         {
             UnGrapple();
         }
-        if (Input.GetKey(key) && isGrappled && isPulling && !isGrappedToNothing)
+        if (Input.GetKey(key) && isGrappled && !isGrappedToNothing)
         {
-            float _distance = Vector2.Distance(grappledPoint, transform.position);
-            if (_distance < distanceRelease)
+            float _currentDistance = Vector2.Distance(transform.position, grappledPoint);
+
+            if (joint.distance > distanceRelease)
             {
-                UnGrapple();
+                joint.distance -= ropeShrinkSpeed * Time.deltaTime;
             }
-            else
+
+            if (joint.distance < _currentDistance)
             {
-                Vector2 _dir = new Vector2(grappledPoint.x - transform.position.x, grappledPoint.y - transform.position.y);
-                rb.linearVelocity += (_dir.normalized) * pullForce;
+                joint.distance = _currentDistance;
             }
         }
     }
@@ -80,13 +85,24 @@ public class GrapplingGun : MonoBehaviour
     {
         isGrappled = true;
         grappledPoint = _pos;
+
         ropeGrapplin.enabled = true;
-        grappleDistanceVector = new Vector2(_pos.x - firePoint.position.x, _pos.y - firePoint.position.y).normalized;
+
+        joint.enabled = true;
+        joint.autoConfigureDistance = false;
+        joint.enableCollision = true;
+
+        float _distance = Vector2.Distance(transform.position, grappledPoint);
+
+        joint.distance = _distance; // distance fixe
+        joint.connectedAnchor = grappledPoint;
+
+        joint.dampingRatio = 0.5f; // stabilité
+        joint.frequency = 1.5f;    // rigidité
     }
 
     public void Pull()
     {
-        isPulling = true;
         if (isGrappedToNothing)
             UnGrapple();
     }
@@ -94,10 +110,10 @@ public class GrapplingGun : MonoBehaviour
     public void UnGrapple()
     {
         isGrappled = false;
+        joint.enabled = false;
+
         grappledPoint = Vector2.zero;
         ropeGrapplin.enabled = false;
-        isPulling = false;
-        grappleDistanceVector = Vector2.zero;
     }
 
     private void OnDrawGizmos()

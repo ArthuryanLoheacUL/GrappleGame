@@ -189,6 +189,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6337585955651160587, guid: b454c840ac01a4c46bc5502c79a9397e, type: 3}
   m_PrefabInstance: {fileID: 1956973347}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &222156787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 506459964771700368, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+  m_PrefabInstance: {fileID: 4913539482442101803}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccfe8c19f8b06c4e9c4eedcf786aebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PullingGun
 --- !u!4 &267147282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4108010102866247522, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
@@ -1149,15 +1160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4108010102866247522, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
       propertyPath: m_LocalScale.y
-      value: -8.672276
+      value: -9.014831
       objectReference: {fileID: 0}
     - target: {fileID: 4108010102866247522, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.6327
+      value: 38.6875
       objectReference: {fileID: 0}
     - target: {fileID: 4108010102866247522, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.9797
+      value: -12.8173
       objectReference: {fileID: 0}
     - target: {fileID: 4108010102866247522, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1355,11 +1366,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
---- !u!4 &1699252292 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2434408538397358965, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-  m_PrefabInstance: {fileID: 4913539482442101803}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1699447462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,6 +1561,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a2ce8598a027f43a529278d85d7a98, type: 3}
+--- !u!114 &1883450307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8766627435157401901, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+  m_PrefabInstance: {fileID: 4913539482442101803}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccfe8c19f8b06c4e9c4eedcf786aebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PullingGun
 --- !u!1 &1907662867
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,28 +2197,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -40294906461209539, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: -40294906461209539, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-      propertyPath: firePoint
-      value: 
-      objectReference: {fileID: 1699252292}
-    - target: {fileID: -40294906461209539, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-      propertyPath: layers.m_Bits
-      value: 512
+      propertyPath: pullForce
+      value: 0.05
       objectReference: {fileID: 0}
-    - target: {fileID: 1148624263967313503, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 1148624263967313503, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-      propertyPath: firePoint
-      value: 
-      objectReference: {fileID: 1699252292}
-    - target: {fileID: 1148624263967313503, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
-      propertyPath: layers.m_Bits
-      value: 512
+    - target: {fileID: 506459964771700368, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: pullForce
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1602810559841246582, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2246,6 +2247,90 @@ PrefabInstance:
     - target: {fileID: 1817319171050454735, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852105654662984105, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: pullingGun
+      value: 
+      objectReference: {fileID: 222156787}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: pullingGun
+      value: 
+      objectReference: {fileID: 1883450307}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.1547401
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.48660067
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.7050392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[4].time
+      value: 0.9956793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[5].time
+      value: 0.9956793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.039149567
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.022852167
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[3].value
+      value: -0.14555822
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[4].value
+      value: 0.011404261
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[5].value
+      value: 0.011404261
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: 1.5167416
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[4].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: 1.5167416
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[4].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[4].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819587396244918446, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: ropeAnimationCurve.m_Curve.Array.data[4].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967532859439324003, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: pullForce
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766627435157401901, guid: 0182c63e90d275e44bc13941c0ee7348, type: 3}
+      propertyPath: pullForce
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
