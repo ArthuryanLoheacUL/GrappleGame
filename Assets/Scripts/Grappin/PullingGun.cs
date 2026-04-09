@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class GrapplingGun : MonoBehaviour
+public class PullingGun : MonoBehaviour
 {
     [Header("Scripts Ref:")]
-    [SerializeField] private RopeGrabingGun ropeGrapplin;
+    [SerializeField] private RopePullingGun ropeGrapplin;
 
     [Header("Refs")]
     public Transform firePoint;
@@ -25,6 +23,8 @@ public class GrapplingGun : MonoBehaviour
     private bool isGrappled;
     [HideInInspector] public bool isGrappedToNothing;
     private bool isPulling;
+
+    
 
     void Start()
     {
