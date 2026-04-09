@@ -5,126 +5,99 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GrapplingGun : MonoBehaviour
 {
-    [Header("Scripts Ref:")]
-    [SerializeField] private RopeGrabingGun ropeGrapplin;
-
-    [Header("Refs")]
-    public Transform firePoint;
-    private Camera cam;
-    [SerializeField] private Rigidbody2D rb;
-
-    [Header("Pull Grappin Settings")]
-    [SerializeField] private LayerMask layers;
-    [SerializeField] private float maxDistance = 50.0f;
-    [SerializeField] private float distanceRelease = 5f;
-    [SerializeField] private KeyCode key;
+    private LineRenderer lr;
+    private Vector3 grapplePoint;
+    public LayerMask whatIsGrappleable;
+    public Transform gunTip, camera, player;
+    private float maxDistance = 20f;
     private SpringJoint2D joint;
 
-    [Header("Private Params & States:")]
-    [HideInInspector] public Vector2 grappledPoint;
-    [HideInInspector] public Vector2 grappleDistanceVector;
-    private bool isGrappled;
-    [HideInInspector] public bool isGrappedToNothing;
-
-    [SerializeField] private float ropeShrinkSpeed = 10f;
-
-    void Start()
+    void Awake()
     {
-        joint = gameObject.AddComponent<SpringJoint2D>();
-        joint.enabled = false;  
-        cam = Camera.main;
-        UnGrapple();
+        lr = GetComponent<LineRenderer>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 _mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 _direction = _mousePos - firePoint.position;
-            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);
-
-            if (_hit)
-            {
-                float _distance = _hit.distance;
-                if (_distance < maxDistance)
-                {
-                    isGrappedToNothing = false;
-                    Grapple(_hit.point);
-                }
-                else
-                {
-                    isGrappedToNothing = true;
-                    Vector2 _newDir = new Vector2(_direction.normalized.x * maxDistance, _direction.normalized.y * maxDistance);
-                    Vector2 _newPos = new Vector2(firePoint.position.x + _newDir.x, firePoint.position.y + _newDir.y);
-                    Grapple(_newPos);
-                }
-            }
+            StartGrapple();
         }
-        if (Input.GetKeyUp(key))
+        else if (Input.GetMouseButtonUp(0))
         {
-            UnGrapple();
-        }
-        if (Input.GetKey(key) && isGrappled && !isGrappedToNothing)
-        {
-            float _currentDistance = Vector2.Distance(transform.position, grappledPoint);
-
-            if (joint.distance > distanceRelease)
-            {
-                joint.distance -= ropeShrinkSpeed * Time.deltaTime;
-            }
-
-            if (joint.distance < _currentDistance)
-            {
-                joint.distance = _currentDistance;
-            }
+            StopGrapple();
         }
     }
 
-    void Grapple(Vector2 _pos)
+    //Called after Update
+    void LateUpdate()
     {
-        isGrappled = true;
-        grappledPoint = _pos;
-
-        ropeGrapplin.enabled = true;
-
-        joint.enabled = true;
-        joint.autoConfigureDistance = false;
-        joint.enableCollision = true;
-
-        float _distance = Vector2.Distance(transform.position, grappledPoint);
-
-        joint.distance = _distance; // distance fixe
-        joint.connectedAnchor = grappledPoint;
-
-        joint.dampingRatio = 0.5f; // stabilité
-        joint.frequency = 1.5f;    // rigidité
+        DrawRope();
     }
 
-    public void Pull()
+    /// <summary>
+    /// Call whenever we want to start a grapple
+    /// </summary>
+    void StartGrapple()
     {
-        if (isGrappedToNothing)
-            UnGrapple();
+        Vector2 _direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.position).normalized;
+
+        RaycastHit2D _hit = Physics2D.Raycast(player.position, _direction, maxDistance, whatIsGrappleable);
+        if (_hit.collider != null)
+        {
+            grapplePoint = _hit.point;
+
+            joint = player.gameObject.AddComponent<SpringJoint2D>();
+            joint.autoConfigureConnectedAnchor = false;
+            joint.enableCollision = true;
+
+            // En 2D, connectedAnchor est un Vector2
+            joint.connectedAnchor = grapplePoint;
+
+            float _distanceFromPoint = Vector2.Distance(player.position, grapplePoint);
+
+            // Distance que le grappin va maintenir
+            joint.distance = _distanceFromPoint;
+
+            // Paramètres physiques
+            joint.frequency = 4.5f;   // équivalent du "spring"
+            joint.dampingRatio = 0.7f; // équivalent du "damper"
+
+            lr.positionCount = 2;
+            currentGrapplePosition = gunTip.position;
+        }
     }
 
-    public void UnGrapple()
-    {
-        isGrappled = false;
-        joint.enabled = false;
 
-        grappledPoint = Vector2.zero;
-        ropeGrapplin.enabled = false;
+    /// <summary>
+    /// Call whenever we want to stop a grapple
+    /// </summary>
+    void StopGrapple()
+    {
+        lr.positionCount = 0;
+        Destroy(joint);
     }
 
-    private void OnDrawGizmos()
+    private Vector3 currentGrapplePosition;
+
+    void DrawRope()
     {
-        if (isGrappled)
-            Gizmos.DrawSphere(grappledPoint, 0.1f);
+        //If not grappling, don't draw rope
+        if (!joint) return;
+
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
+
+        lr.SetPosition(0, gunTip.position);
+        lr.SetPosition(1, currentGrapplePosition);
     }
 
-    private void OnDrawGizmosSelected()
+    public bool IsGrappling()
     {
-        Gizmos.DrawWireSphere(transform.position, maxDistance);
-        Gizmos.DrawWireSphere(transform.position, distanceRelease);
+        return joint != null;
+    }
+
+    public Vector3 GetGrapplePoint()
+    {
+        return grapplePoint;
     }
 }

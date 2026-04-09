@@ -71,7 +71,7 @@ public class PullingGun : MonoBehaviour
             else
             {
                 Vector2 _dir = new Vector2(grappledPoint.x - transform.position.x, grappledPoint.y - transform.position.y);
-                rb.linearVelocity += (_dir.normalized) * pullForce;
+                rb.linearVelocity += (_dir.normalized) * pullForce * Time.deltaTime;
             }
         }
     }
