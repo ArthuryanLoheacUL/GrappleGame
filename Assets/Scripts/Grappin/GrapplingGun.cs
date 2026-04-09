@@ -2,23 +2,26 @@ using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
 {
-    public RopeGrapplinGun ropeGrapplin;
+    [Header("Scripts Ref:")]
+    [SerializeField] private RopeGrapplinGun ropeGrapplin;
 
-    public Transform firePoint;
-    public Camera cam;
-    public LayerMask layers;
-    public float maxDistance = 50.0f;
-    public float distanceRelease = 5f;
+    [Header("Refs")]
+    [HideInInspector] public Transform firePoint;
+    [SerializeField] private Camera cam;
+    [SerializeField] private Rigidbody2D rb;
 
-    public Rigidbody2D rb;
-    public float pullForce;
+    [Header("Pull Grappin Settings")]
+    [SerializeField] private LayerMask layers;
+    [SerializeField] private float maxDistance = 50.0f;
+    [SerializeField] private float distanceRelease = 5f;
+    [SerializeField] private float pullForce;
 
-    public Vector2 grappledPoint;
-    public bool isGrappled;
-    public bool isGrappedToNothing;
-    public Vector2 grappleDistanceVector;
-
-    public bool isPulling;
+    [Header("Private Params & States:")]
+    [HideInInspector] public Vector2 grappledPoint;
+    [HideInInspector] public Vector2 grappleDistanceVector;
+    [SerializeField] private bool isGrappled;
+    [HideInInspector] public bool isGrappedToNothing;
+    [SerializeField] private bool isPulling;
 
     void Start()
     {
