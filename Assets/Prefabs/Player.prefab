@@ -290,15 +290,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e519ba64023ce384594be0a40edf929b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrapplingGun
-  ropeGrappin: {fileID: 1634144328943906609}
-  grapplePoint: {x: 0, y: 0, z: 0}
+  firePoint: {fileID: 7398773796394551986}
+  player: {fileID: 1602810559841246582}
+  maxDistance: 20
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 512
-  firePoint: {fileID: 7398773796394551986}
-  player: {fileID: 1602810559841246582}
-  grappleDistanceVector: {x: 0, y: 0}
   key: 323
+  grappleDistanceVector: {x: 0, y: 0}
+  grapplePoint: {x: 0, y: 0, z: 0}
   isGrappedToNothing: 0
   isActive: 0
 --- !u!114 &1634144328943906609
@@ -621,13 +621,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817319171050454735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68c271baa70579d4c9376ed8c1a0e85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   timer: 0
-  durationBeforeDeath: 1.5
+  durationBeforeDeath: 2
   spriteDie: {fileID: 6382011676295059204}
 --- !u!1 &2285869265802882994
 GameObject:

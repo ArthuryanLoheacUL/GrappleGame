@@ -61,7 +61,7 @@ public class RopePullingGun : MonoBehaviour
     {
         if (!strightLine)
         {
-            if (Mathf.Abs(lineRenderer.GetPosition(percision - 1).x - pullingGun.grappledPoint.x) <= 0.02f || moveTime > 1) 
+            if (Mathf.Abs(lineRenderer.GetPosition(percision - 1).x - pullingGun.grappledPoint.x) <= 0.05f) 
             {
                 strightLine = true;
                 if (pullingGun.isGrappedToNothing)

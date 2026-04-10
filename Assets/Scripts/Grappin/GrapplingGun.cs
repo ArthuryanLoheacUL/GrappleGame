@@ -5,21 +5,31 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GrapplingGun : MonoBehaviour
 {
-    [SerializeField] private RopeGrabingGun ropeGrappin;
-    [HideInInspector] public Vector3 grapplePoint;
-    public LayerMask whatIsGrappleable;
-    public Transform firePoint, player;
-    private float maxDistance = 20f;
-    private SpringJoint2D joint;
-    [HideInInspector] public Vector2 grappleDistanceVector;
+    [Header("Refs:")]
+    private RopeGrabingGun ropeGrappin;
+    public Transform firePoint;
+    public Transform player;
 
+    [Header("Datas:")]
+    [SerializeField] private float maxDistance = 20f;
+    public LayerMask whatIsGrappleable;
     [SerializeField] private KeyCode key;
-    private bool isGrapped = false;
-    private float distanceWithGrappedPoint = 0f;
+
+    [Header("Private Params")]
+    [HideInInspector] public Vector2 grappleDistanceVector;
+    [HideInInspector] public Vector3 grapplePoint;
     [HideInInspector] public bool isGrappedToNothing = false;
     [HideInInspector] public bool isActive = false;
+    private bool isGrapped = false;
+    private float distanceWithGrappedPoint = 0f;
+    private SpringJoint2D joint;
 
     void Awake()
+    {
+        ropeGrappin = GetComponent<RopeGrabingGun>();
+    }
+
+    private void Start()
     {
         isGrapped = false;
         ropeGrappin.enabled = false;
