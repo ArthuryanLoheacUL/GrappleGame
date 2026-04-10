@@ -8,24 +8,43 @@ public class GrapplingGun : MonoBehaviour
     private LineRenderer lr;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
-    public Transform gunTip, camera, player;
+    public Transform gunTip, player;
     private float maxDistance = 20f;
     private SpringJoint2D joint;
+    private Vector3 currentGrapplePosition;
+
+    [SerializeField] private KeyCode key;
+    private bool isGrapped = false;
+    private float distanceWithGrappedPoint = 0f;
 
     void Awake()
     {
         lr = GetComponent<LineRenderer>();
+        isGrapped = false;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(key))
         {
             StartGrapple();
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetKeyUp(key))
         {
             StopGrapple();
+        }
+        if (isGrapped && joint == null)
+        {
+            float _distance = Vector2.Distance(player.transform.position, grapplePoint);
+            Debug.Log("Dist : " +  _distance.ToString() + " Max " + distanceWithGrappedPoint.ToString());
+
+            if (_distance <= distanceWithGrappedPoint)
+            {
+                distanceWithGrappedPoint = _distance;
+            } else
+            {
+                InitJointGrapple();
+            }
         }
     }
 
@@ -35,9 +54,6 @@ public class GrapplingGun : MonoBehaviour
         DrawRope();
     }
 
-    /// <summary>
-    /// Call whenever we want to start a grapple
-    /// </summary>
     void StartGrapple()
     {
         Vector2 _direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.position).normalized;
@@ -46,58 +62,50 @@ public class GrapplingGun : MonoBehaviour
         if (_hit.collider != null)
         {
             grapplePoint = _hit.point;
+            isGrapped = true;
 
-            joint = player.gameObject.AddComponent<SpringJoint2D>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.enableCollision = true;
-
-            // En 2D, connectedAnchor est un Vector2
-            joint.connectedAnchor = grapplePoint;
-
-            float _distanceFromPoint = Vector2.Distance(player.position, grapplePoint);
-
-            // Distance que le grappin va maintenir
-            joint.distance = _distanceFromPoint;
-
-            // Paramètres physiques
-            joint.frequency = 4.5f;   // équivalent du "spring"
-            joint.dampingRatio = 0.7f; // équivalent du "damper"
+            distanceWithGrappedPoint = Vector2.Distance(player.transform.position, grapplePoint);
 
             lr.positionCount = 2;
             currentGrapplePosition = gunTip.position;
         }
     }
 
+    void InitJointGrapple()
+    {
+        joint = player.gameObject.AddComponent<SpringJoint2D>();
+        joint.autoConfigureConnectedAnchor = false;
+        joint.enableCollision = true;
 
-    /// <summary>
-    /// Call whenever we want to stop a grapple
-    /// </summary>
+        // En 2D, connectedAnchor est un Vector2
+        joint.connectedAnchor = grapplePoint;
+
+        float _distanceFromPoint = Vector2.Distance(player.position, grapplePoint);
+
+        // Distance que le grappin va maintenir
+        joint.distance = _distanceFromPoint;
+
+        // Paramètres physiques
+        joint.frequency = 4.5f;   // équivalent du "spring"
+        joint.dampingRatio = 0.7f; // équivalent du "damper"
+    }
+
     void StopGrapple()
     {
         lr.positionCount = 0;
+        isGrapped = false;
         Destroy(joint);
     }
 
-    private Vector3 currentGrapplePosition;
 
     void DrawRope()
     {
-        //If not grappling, don't draw rope
-        if (!joint) return;
+        if (!isGrapped)
+            return;
 
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
 
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
-    }
-
-    public bool IsGrappling()
-    {
-        return joint != null;
-    }
-
-    public Vector3 GetGrapplePoint()
-    {
-        return grapplePoint;
     }
 }
