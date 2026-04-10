@@ -393,7 +393,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ropeProgressionSpeed: 10
+  ropeProgressionSpeed: 15
   isGrappling: 1
 --- !u!1 &1817319171050454735
 GameObject:
@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 6108196636294913772}
   - component: {fileID: 462470869768328366}
   - component: {fileID: 6465222429535960833}
+  - component: {fileID: 3676376986335251321}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -627,8 +628,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   timer: 0
-  durationBeforeDeath: 2
+  durationBeforeDeath: 3
   spriteDie: {fileID: 6382011676295059204}
+--- !u!114 &3676376986335251321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817319171050454735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 747a0588581cf644a95d30d61e86519f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  grabGun: {fileID: 2407413818823102184}
 --- !u!1 &2285869265802882994
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +1000,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d8b977d6532d1dd4cae1c0bdae5c3d99, type: 2}
+  - {fileID: 2100000, guid: ac3788b6f32b28548bc718abdd6c5ffa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1057,7 +1071,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 1
@@ -1162,7 +1176,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ropeProgressionSpeed: 10
+  ropeProgressionSpeed: 15
   isGrappling: 1
 --- !u!114 &506459964771700368
 MonoBehaviour:
