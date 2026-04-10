@@ -290,12 +290,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e519ba64023ce384594be0a40edf929b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrapplingGun
+  ropeGrappin: {fileID: 1634144328943906609}
+  grapplePoint: {x: 0, y: 0, z: 0}
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 512
-  gunTip: {fileID: 7398773796394551986}
+  firePoint: {fileID: 7398773796394551986}
   player: {fileID: 1602810559841246582}
+  grappleDistanceVector: {x: 0, y: 0}
   key: 323
+  isGrappedToNothing: 0
+  isActive: 0
 --- !u!114 &1634144328943906609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +313,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b3001e854d49f45af0e5caea1cfdfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeGrabingGun
+  gun: {fileID: 2407413818823102184}
+  lineRenderer: {fileID: 8715182560978169561}
+  percision: 40
+  straightenLineSpeed: 5
+  ropeAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.019531727
+      value: -0.0068681687
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.20004773
+      value: 0.14743519
+      inSlope: -0.28329203
+      outSlope: -0.28329203
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13257585
+    - serializedVersion: 3
+      time: 0.32184818
+      value: -0.07146579
+      inSlope: -1.5769978
+      outSlope: -1.5769978
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7173954
+      value: 0.09823761
+      inSlope: -1.5167416
+      outSlope: -1.5167416
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0080355
+      value: -0.01450035
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  startWaveSize: 2
+  ropeProgressionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ropeProgressionSpeed: 10
+  isGrappling: 1
 --- !u!1 &1817319171050454735
 GameObject:
   m_ObjectHideFlags: 0

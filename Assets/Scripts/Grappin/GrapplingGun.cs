@@ -5,22 +5,24 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GrapplingGun : MonoBehaviour
 {
-    private LineRenderer lr;
-    private Vector3 grapplePoint;
+    [SerializeField] private RopeGrabingGun ropeGrappin;
+    [HideInInspector] public Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
-    public Transform gunTip, player;
+    public Transform firePoint, player;
     private float maxDistance = 20f;
     private SpringJoint2D joint;
-    private Vector3 currentGrapplePosition;
+    [HideInInspector] public Vector2 grappleDistanceVector;
 
     [SerializeField] private KeyCode key;
     private bool isGrapped = false;
     private float distanceWithGrappedPoint = 0f;
+    [HideInInspector] public bool isGrappedToNothing = false;
+    [HideInInspector] public bool isActive = false;
 
     void Awake()
     {
-        lr = GetComponent<LineRenderer>();
         isGrapped = false;
+        ropeGrappin.enabled = false;
     }
 
     void Update()
@@ -33,10 +35,9 @@ public class GrapplingGun : MonoBehaviour
         {
             StopGrapple();
         }
-        if (isGrapped && joint == null)
+        if (isGrapped && joint == null && isActive)
         {
             float _distance = Vector2.Distance(player.transform.position, grapplePoint);
-            Debug.Log("Dist : " +  _distance.ToString() + " Max " + distanceWithGrappedPoint.ToString());
 
             if (_distance <= distanceWithGrappedPoint)
             {
@@ -48,12 +49,6 @@ public class GrapplingGun : MonoBehaviour
         }
     }
 
-    //Called after Update
-    void LateUpdate()
-    {
-        DrawRope();
-    }
-
     void StartGrapple()
     {
         Vector2 _direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.position).normalized;
@@ -63,12 +58,21 @@ public class GrapplingGun : MonoBehaviour
         {
             grapplePoint = _hit.point;
             isGrapped = true;
+            isGrappedToNothing = false;
+
+            ropeGrappin.enabled = true;
 
             distanceWithGrappedPoint = Vector2.Distance(player.transform.position, grapplePoint);
-
-            lr.positionCount = 2;
-            currentGrapplePosition = gunTip.position;
+            grappleDistanceVector = new Vector2(grapplePoint.x - firePoint.position.x, grapplePoint.y - firePoint.position.y).normalized;
+        } else
+        {
+            isGrappedToNothing = true;
         }
+    }
+
+    public void Activate()
+    {
+        isActive = true;
     }
 
     void InitJointGrapple()
@@ -90,22 +94,11 @@ public class GrapplingGun : MonoBehaviour
         joint.dampingRatio = 0.7f; // équivalent du "damper"
     }
 
-    void StopGrapple()
+    public void StopGrapple()
     {
-        lr.positionCount = 0;
+        ropeGrappin.enabled = false;
         isGrapped = false;
+        grappleDistanceVector = Vector2.zero;
         Destroy(joint);
-    }
-
-
-    void DrawRope()
-    {
-        if (!isGrapped)
-            return;
-
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
-
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, currentGrapplePosition);
     }
 }
