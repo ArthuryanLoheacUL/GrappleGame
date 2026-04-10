@@ -10,6 +10,7 @@ public class DieFromSpeed : MonoBehaviour
 
     [SerializeField] private Image spriteDie;
     [SerializeField] private GameObject prefabExplosion;
+    [SerializeField] private FinalCameraPos finalCameraPos;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class DieFromSpeed : MonoBehaviour
     void DestroyBall()
     {
         Instantiate(prefabExplosion, transform.position, Quaternion.identity);
+        finalCameraPos.ActiveFinalCam();
         Destroy(gameObject);
     }
 }
