@@ -9,6 +9,7 @@ public class DieFromSpeed : MonoBehaviour
     public float durationBeforeDeath = 0f;
 
     [SerializeField] private Image spriteDie;
+    [SerializeField] private GameObject prefabExplosion;
 
     private void Awake()
     {
@@ -29,7 +30,7 @@ public class DieFromSpeed : MonoBehaviour
         }
         if (timer >= durationBeforeDeath)
         {
-            Destroy(gameObject);
+            DestroyBall();
         }
         if (timer > 0f)
         {
@@ -41,5 +42,11 @@ public class DieFromSpeed : MonoBehaviour
             spriteDie.enabled = false;
             timer = 0f;
         }
+    }
+
+    void DestroyBall()
+    {
+        Instantiate(prefabExplosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

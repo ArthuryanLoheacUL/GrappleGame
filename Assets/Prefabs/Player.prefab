@@ -424,7 +424,7 @@ Transform:
   m_GameObject: {fileID: 1817319171050454735}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.36611, y: 0.55758, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -629,6 +629,7 @@ MonoBehaviour:
   timer: 0
   durationBeforeDeath: 3
   spriteDie: {fileID: 6382011676295059204}
+  prefabExplosion: {fileID: 5512710540585398210, guid: e597e2d5794d7334bac7c1cbdfc03905, type: 3}
 --- !u!114 &3676376986335251321
 MonoBehaviour:
   m_ObjectHideFlags: 0
