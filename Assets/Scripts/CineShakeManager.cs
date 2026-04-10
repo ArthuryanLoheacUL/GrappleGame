@@ -9,10 +9,15 @@ public class CineShakeManager : MonoBehaviour
     [SerializeField] private CinemachineBasicMultiChannelPerlin cam;
 
     List<Tuple<float, float>> shakes = new List<Tuple<float, float>>();
+    List<float> oneShakes = new List<float>();
 
     public void Shake(float _duration, float _intensity)
     {
         shakes.Add(new Tuple<float, float>(_duration, _intensity));
+    }
+    public void ShakeOneFrame(float _intensity)
+    {
+        oneShakes.Add(_intensity);
     }
 
     private void Start()
@@ -43,6 +48,11 @@ public class CineShakeManager : MonoBehaviour
                 _i--;
             }
         }
+        foreach (var _shake in oneShakes)
+        {
+            _intens += _shake;
+        }
+        oneShakes.Clear();
         cam.AmplitudeGain = _intens;
     }
 }

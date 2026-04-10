@@ -11,7 +11,7 @@ public class SpeedPlayerManager : MonoBehaviour
     [SerializeField] private Color speedColor;
     [SerializeField] private Color maxSpeedColor;
 
-    [SerializeField] private float speedThreshold;
+    public float speedThreshold;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxSpeedColorThreshold;
 
