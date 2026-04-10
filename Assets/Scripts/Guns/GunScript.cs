@@ -1,20 +1,16 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PullingGun : MonoBehaviour
+abstract public class GunScript : MonoBehaviour
 {
     [Header("Scripts Ref:")]
-    [SerializeField] private RopePullingGun ropeGrapplin;
+    [SerializeField] private RopeGun rope;
 
     [Header("Refs")]
     public Transform firePoint;
     private Camera cam;
-    [SerializeField] private Rigidbody2D rb;
 
     [Header("Pull Grappin Settings")]
     [SerializeField] private LayerMask layers;
-    [SerializeField] private float distanceRelease = 5f;
-    [SerializeField] private float pullForce;
     [SerializeField] private KeyCode key;
     const float MAX_DIST = 20f;
 
@@ -23,9 +19,7 @@ public class PullingGun : MonoBehaviour
     [HideInInspector] public Vector2 grappleDistanceVector;
     private bool isGrappled;
     [HideInInspector] public bool isGrappedToNothing;
-    private bool isPulling;
-
-    
+    private bool isActive;
 
     void Start()
     {
@@ -57,7 +51,8 @@ public class PullingGun : MonoBehaviour
             {
                 isGrappedToNothing = false;
                 Grapple(_hit.point);
-            } else
+            }
+            else
             {
                 isGrappedToNothing = true;
                 Vector2 _newDir = new Vector2(_direction.normalized.x * MAX_DIST, _direction.normalized.y * MAX_DIST);
@@ -69,53 +64,36 @@ public class PullingGun : MonoBehaviour
         {
             UnGrapple();
         }
-        if (Input.GetKey(key) && isGrappled && isPulling && !isGrappedToNothing)
+        if (Input.GetKey(key) && isGrappled && isActive && !isGrappedToNothing)
         {
-            float _distance = Vector2.Distance(grappledPoint, transform.position);
-            if (_distance < distanceRelease)
-            {
-                UnGrapple();
-            }
-            else
-            {
-                Vector2 _dir = new Vector2(grappledPoint.x - transform.position.x, grappledPoint.y - transform.position.y);
-                rb.linearVelocity += (_dir.normalized) * pullForce * Time.deltaTime;
-            }
+            OnActive();
         }
     }
 
-    void Grapple(Vector2 _pos)
+    virtual protected void OnActive()
     {
-        isGrappled = true;
-        grappledPoint = _pos;
-        ropeGrapplin.enabled = true;
-        grappleDistanceVector = new Vector2(_pos.x - firePoint.position.x, _pos.y - firePoint.position.y).normalized;
+
     }
 
-    public void Pull()
+    public void Activate()
     {
-        isPulling = true;
+        isActive = true;
         if (isGrappedToNothing)
             UnGrapple();
     }
-
-    public void UnGrapple()
+    virtual protected void Grapple(Vector2 _pos)
+    {
+        isGrappled = true;
+        grappledPoint = _pos;
+        rope.enabled = true;
+        grappleDistanceVector = new Vector2(_pos.x - firePoint.position.x, _pos.y - firePoint.position.y).normalized;
+    }
+    virtual public void UnGrapple()
     {
         isGrappled = false;
         grappledPoint = Vector2.zero;
-        ropeGrapplin.enabled = false;
-        isPulling = false;
+        rope.enabled = false;
+        isActive = false;
         grappleDistanceVector = Vector2.zero;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (isGrappled)
-            Gizmos.DrawSphere(grappledPoint, 0.1f);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, distanceRelease);
     }
 }

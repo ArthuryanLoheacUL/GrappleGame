@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BreakGrabRopeOnCollide : MonoBehaviour
 {
-    [SerializeField] private GrapplingGun grabGun;
+    [SerializeField] private GunGrab grabGun;
 
     private void OnCollisionEnter2D(Collision2D _collision)
     {
