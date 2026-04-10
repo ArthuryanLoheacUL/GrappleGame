@@ -67,7 +67,11 @@ public class RopePullingGun : MonoBehaviour
                 if (pullingGun.isGrappedToNothing)
                     pullingGun.UnGrapple();
                 else
+                {
                     CineShakeManager.instance.Shake(0.1f, 1.5f);
+                    if (GetComponent<GunSound>())
+                        GetComponent<GunSound>().PlayOnGrab();
+                }
             }
             else
             {

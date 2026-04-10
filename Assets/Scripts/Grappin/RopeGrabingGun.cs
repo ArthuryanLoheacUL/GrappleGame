@@ -66,6 +66,8 @@ public class RopeGrabingGun : MonoBehaviour
                 strightLine = true;
                 if (gun.isGrappedToNothing)
                     gun.StopGrapple();
+                if (GetComponent<GunSound>())
+                    GetComponent<GunSound>().PlayOnGrab();
             }
             else
             {

@@ -46,6 +46,9 @@ public class PullingGun : MonoBehaviour
     {
         if (Input.GetKeyDown(key))
         {
+            if (GetComponent<GunSound>())
+                GetComponent<GunSound>().PlayOnShoot();
+
             Vector3 _mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 _direction = _mousePos - firePoint.position;
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);

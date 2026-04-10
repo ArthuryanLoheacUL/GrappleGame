@@ -41,6 +41,8 @@ public class GrapplingGun : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             StartGrapple();
+            if (GetComponent<GunSound>())
+                GetComponent<GunSound>().PlayOnShoot();
         }
         else if (Input.GetKeyUp(key))
         {
@@ -55,7 +57,6 @@ public class GrapplingGun : MonoBehaviour
                 distanceWithGrappedPoint = _distance;
             } else if (_distance - distanceWithGrappedPoint >= 0.1f)
             {
-                Debug.Log("JOINT");
                 InitJointGrapple();
             }
         }
