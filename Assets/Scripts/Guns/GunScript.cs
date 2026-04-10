@@ -36,29 +36,54 @@ abstract public class GunScript : MonoBehaviour
             _viewportPos.y >= 0 && _viewportPos.y <= 1;
     }
 
+    RaycastHit2D GetSnappedShoot(Vector2 _direction)
+    {
+        float[] _angles = { -5, -4, -3, -2, -1, 1, 2, 3, 4, 5 };
+        RaycastHit2D _minHit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);
+        float _minDistance = float.MaxValue;
+        if (_minHit.collider)
+            _minDistance = _minHit.distance;
+
+        foreach (var _angle in _angles)
+        {
+            Vector2 _newVec = Quaternion.Euler(0, 0, _angle) * _direction;
+            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, _newVec.normalized, Mathf.Infinity, layers);
+            if (_hit.collider && _hit.distance < _minDistance)
+            {
+                _minDistance = _hit.distance;
+                _minHit = _hit;
+            }
+        }
+        return _minHit;
+    }
+
+    void Shoot()
+    {
+        if (GetComponent<GunSound>())
+            GetComponent<GunSound>().PlayOnShoot();
+
+        Vector2 _direction = cam.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
+        RaycastHit2D _hit = GetSnappedShoot(_direction);
+
+        if (_hit.collider && IsPointOnScreen(_hit.point))
+        {
+            isGrappedToNothing = false;
+            Grapple(_hit.point);
+        }
+        else
+        {
+            isGrappedToNothing = true;
+            Vector2 _newDir = new Vector2(_direction.normalized.x * MAX_DIST, _direction.normalized.y * MAX_DIST);
+            Vector2 _newPos = new Vector2(firePoint.position.x + _newDir.x, firePoint.position.y + _newDir.y);
+            Grapple(_newPos);
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(key))
         {
-            if (GetComponent<GunSound>())
-                GetComponent<GunSound>().PlayOnShoot();
-
-            Vector3 _mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 _direction = _mousePos - firePoint.position;
-            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);
-
-            if (_hit.collider && IsPointOnScreen(_hit.point))
-            {
-                isGrappedToNothing = false;
-                Grapple(_hit.point);
-            }
-            else
-            {
-                isGrappedToNothing = true;
-                Vector2 _newDir = new Vector2(_direction.normalized.x * MAX_DIST, _direction.normalized.y * MAX_DIST);
-                Vector2 _newPos = new Vector2(firePoint.position.x + _newDir.x, firePoint.position.y + _newDir.y);
-                Grapple(_newPos);
-            }
+            Shoot();
         }
         if (Input.GetKeyUp(key))
         {

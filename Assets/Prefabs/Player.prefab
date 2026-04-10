@@ -144,8 +144,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2861933888634563243}
   - component: {fileID: 8715182560978169561}
-  - component: {fileID: 2407413818823102184}
-  - component: {fileID: 1634144328943906609}
+  - component: {fileID: 9097270200733556726}
+  - component: {fileID: 3844371430256008955}
+  - component: {fileID: 889346347856494169}
   m_Layer: 0
   m_Name: RopeGrab
   m_TagString: Untagged
@@ -278,7 +279,7 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &2407413818823102184
+--- !u!114 &9097270200733556726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,20 +288,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455188062259508382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e519ba64023ce384594be0a40edf929b, type: 3}
+  m_Script: {fileID: 11500000, guid: 41a87829a886d694e9089fd631e2601b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GrapplingGun
-  firePoint: {fileID: 7398773796394551986}
-  player: {fileID: 1602810559841246582}
-  whatIsGrappleable:
-    serializedVersion: 2
-    m_Bits: 512
-  key: 323
-  grappleDistanceVector: {x: 0, y: 0}
-  grapplePoint: {x: 0, y: 0, z: 0}
-  isGrappedToNothing: 0
-  isActive: 0
---- !u!114 &1634144328943906609
+  m_EditorClassIdentifier: Assembly-CSharp::GunSound
+  audioOnShoot: {fileID: 8300000, guid: ffea7c58d6f55a0449c8c02d56a20d41, type: 3}
+  volumeShoot: 0.3
+  pitchShoot: 1
+  audioOnGrab: {fileID: 8300000, guid: c98219d174585984bb9e53bc5042f15f, type: 3}
+  volumeGrab: 0.1
+  pitchGrab: 1
+--- !u!114 &3844371430256008955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,10 +306,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455188062259508382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b3001e854d49f45af0e5caea1cfdfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 25ac12d8897640440a3c4aaa77df5516, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RopeGrabingGun
-  gun: {fileID: 2407413818823102184}
+  m_EditorClassIdentifier: Assembly-CSharp::RopeGun
+  gun: {fileID: 889346347856494169}
   lineRenderer: {fileID: 8715182560978169561}
   percision: 40
   straightenLineSpeed: 5
@@ -322,8 +319,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.019531727
       value: -0.0068681687
-      inSlope: -0
-      outSlope: -0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -358,8 +355,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1.0080355
       value: -0.01450035
-      inSlope: -0
-      outSlope: -0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -394,6 +391,28 @@ MonoBehaviour:
     m_RotationOrder: 4
   ropeProgressionSpeed: 15
   isGrappling: 1
+--- !u!114 &889346347856494169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455188062259508382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2819fa92922e3d54d8cd20553dbf665d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunGrab
+  rope: {fileID: 3844371430256008955}
+  firePoint: {fileID: 7398773796394551986}
+  layers:
+    serializedVersion: 2
+    m_Bits: 512
+  key: 323
+  grappledPoint: {x: 0, y: 0}
+  grappleDistanceVector: {x: 0, y: 0}
+  isGrappedToNothing: 0
+  player: {fileID: 1602810559841246582}
 --- !u!1 &1817319171050454735
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747a0588581cf644a95d30d61e86519f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  grabGun: {fileID: 2407413818823102184}
+  grabGun: {fileID: 889346347856494169}
 --- !u!1 &2285869265802882994
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,8 +969,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1368778483802643873}
   - component: {fileID: 1793948667448392483}
-  - component: {fileID: 1852105654662984105}
-  - component: {fileID: 506459964771700368}
+  - component: {fileID: 5677218639164361713}
+  - component: {fileID: 9159242827819531007}
+  - component: {fileID: 8769368762352337769}
   m_Layer: 0
   m_Name: RopePull
   m_TagString: Untagged
@@ -1084,7 +1104,7 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1852105654662984105
+--- !u!114 &5677218639164361713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1093,10 +1113,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 4612047502449081652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb55d33c9a349f24cad89f0720566e1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 41a87829a886d694e9089fd631e2601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  pullingGun: {fileID: 506459964771700368}
+  audioOnShoot: {fileID: 8300000, guid: af809dc284d5f81499293c30801ff367, type: 3}
+  volumeShoot: 0.3
+  pitchShoot: 1
+  audioOnGrab: {fileID: 8300000, guid: c98219d174585984bb9e53bc5042f15f, type: 3}
+  volumeGrab: 0.1
+  pitchGrab: 1
+--- !u!114 &9159242827819531007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612047502449081652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a790f4d6d27197a4d95a59d23dcb08cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunPull
+  rope: {fileID: 8769368762352337769}
+  firePoint: {fileID: 2434408538397358965}
+  layers:
+    serializedVersion: 2
+    m_Bits: 512
+  key: 324
+  grappledPoint: {x: 0, y: 0}
+  grappleDistanceVector: {x: 0, y: 0}
+  isGrappedToNothing: 0
+  distanceRelease: 1.5
+  pullForce: 35
+  rb: {fileID: 7493217921713181770}
+--- !u!114 &8769368762352337769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612047502449081652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ac12d8897640440a3c4aaa77df5516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RopeGun
+  gun: {fileID: 9159242827819531007}
   lineRenderer: {fileID: 1793948667448392483}
   percision: 40
   straightenLineSpeed: 5
@@ -1178,30 +1240,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   ropeProgressionSpeed: 15
   isGrappling: 1
---- !u!114 &506459964771700368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4612047502449081652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ccfe8c19f8b06c4e9c4eedcf786aebb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PullingGun
-  ropeGrapplin: {fileID: 1852105654662984105}
-  firePoint: {fileID: 2434408538397358965}
-  rb: {fileID: 7493217921713181770}
-  layers:
-    serializedVersion: 2
-    m_Bits: 512
-  distanceRelease: 1.5
-  pullForce: 35
-  key: 324
-  grappledPoint: {x: 0, y: 0}
-  grappleDistanceVector: {x: 0, y: 0}
-  isGrappedToNothing: 0
 --- !u!1 &6010338315550958708
 GameObject:
   m_ObjectHideFlags: 0
