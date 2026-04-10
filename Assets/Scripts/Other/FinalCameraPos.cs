@@ -4,8 +4,7 @@ using UnityEngine;
 public class FinalCameraPos : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera cinemachineCamera;
-    [SerializeField] private float originalOrthographicSize = 12f;
-    [SerializeField] private PathPlayerAnalyser pathPlayer;
+    private float originalOrthographicSize = 12f;
 
     [Header("Final Pos")]
     [SerializeField] private Vector2 finalPosition = Vector2.zero;
@@ -20,6 +19,10 @@ public class FinalCameraPos : MonoBehaviour
     private Vector2 startPosAnimation = Vector2.zero;
     private float startOrthoSizeAnimation = 0f;
 
+    private void Start()
+    {
+        originalOrthographicSize = cinemachineCamera.Lens.OrthographicSize;
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -80,6 +83,6 @@ public class FinalCameraPos : MonoBehaviour
     void OnArrivedFinalPos()
     {
         onTransition = false;
-        pathPlayer.ShowPath();
+        PathPlayerAnalyser.instance.ShowPath();
     }
 }
