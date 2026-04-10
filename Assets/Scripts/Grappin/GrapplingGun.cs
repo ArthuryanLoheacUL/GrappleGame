@@ -1,4 +1,5 @@
 using UnityEditor.SceneManagement;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -11,7 +12,7 @@ public class GrapplingGun : MonoBehaviour
     public Transform player;
 
     [Header("Datas:")]
-    [SerializeField] private float maxDistance = 20f;
+    const float MAX_DIST = 20f;
     public LayerMask whatIsGrappleable;
     [SerializeField] private KeyCode key;
 
@@ -54,30 +55,47 @@ public class GrapplingGun : MonoBehaviour
                 distanceWithGrappedPoint = _distance;
             } else if (_distance - distanceWithGrappedPoint >= 0.1f)
             {
+                Debug.Log("JOINT");
                 InitJointGrapple();
             }
         }
+    }
+
+    bool IsPointOnScreen(Vector2 _point)
+    {
+        Vector3 _viewportPos = Camera.main.WorldToViewportPoint(_point);
+
+        return _viewportPos.z > 0 &&
+            _viewportPos.x >= 0 && _viewportPos.x <= 1 &&
+            _viewportPos.y >= 0 && _viewportPos.y <= 1;
     }
 
     void StartGrapple()
     {
         Vector2 _direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.position).normalized;
 
-        RaycastHit2D _hit = Physics2D.Raycast(player.position, _direction, maxDistance, whatIsGrappleable);
-        if (_hit.collider != null)
+        RaycastHit2D _hit = Physics2D.Raycast(player.position, _direction, Mathf.Infinity, whatIsGrappleable);
+        
+        if (_hit.collider != null && IsPointOnScreen(_hit.point))
         {
-            grapplePoint = _hit.point;
-            isGrapped = true;
             isGrappedToNothing = false;
-
-            ropeGrappin.enabled = true;
+            Grapple(_hit.point);
 
             distanceWithGrappedPoint = Vector2.Distance(player.transform.position, grapplePoint);
-            grappleDistanceVector = new Vector2(grapplePoint.x - firePoint.position.x, grapplePoint.y - firePoint.position.y).normalized;
         } else
         {
             isGrappedToNothing = true;
+            Vector2 _newDir = new Vector2(_direction.normalized.x * MAX_DIST, _direction.normalized.y * MAX_DIST);
+            Grapple(new Vector2(firePoint.position.x + _newDir.x, firePoint.position.y + _newDir.y));
         }
+    }
+
+    void Grapple(Vector2 _point)
+    {
+        ropeGrappin.enabled = true;
+        isGrapped = true;
+        grapplePoint = _point;
+        grappleDistanceVector = new Vector2(grapplePoint.x - firePoint.position.x, grapplePoint.y - firePoint.position.y).normalized;
     }
 
     public void Activate()
@@ -101,6 +119,7 @@ public class GrapplingGun : MonoBehaviour
     public void StopGrapple()
     {
         ropeGrappin.enabled = false;
+        isActive = false;
         isGrapped = false;
         grappleDistanceVector = Vector2.zero;
         Destroy(joint);

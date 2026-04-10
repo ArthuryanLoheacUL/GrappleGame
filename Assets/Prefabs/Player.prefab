@@ -292,7 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrapplingGun
   firePoint: {fileID: 7398773796394551986}
   player: {fileID: 1602810559841246582}
-  maxDistance: 20
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 512
@@ -1196,7 +1195,6 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 512
-  maxDistance: 20
   distanceRelease: 1.5
   pullForce: 35
   key: 324

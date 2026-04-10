@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PullingGun : MonoBehaviour
@@ -12,10 +13,10 @@ public class PullingGun : MonoBehaviour
 
     [Header("Pull Grappin Settings")]
     [SerializeField] private LayerMask layers;
-    [SerializeField] private float maxDistance = 50.0f;
     [SerializeField] private float distanceRelease = 5f;
     [SerializeField] private float pullForce;
     [SerializeField] private KeyCode key;
+    const float MAX_DIST = 20f;
 
     [Header("Private Params & States:")]
     [HideInInspector] public Vector2 grappledPoint;
@@ -32,6 +33,15 @@ public class PullingGun : MonoBehaviour
         UnGrapple();
     }
 
+    bool IsPointOnScreen(Vector2 _point)
+    {
+        Vector3 _viewportPos = Camera.main.WorldToViewportPoint(_point);
+
+        return _viewportPos.z > 0 &&
+            _viewportPos.x >= 0 && _viewportPos.x <= 1 &&
+            _viewportPos.y >= 0 && _viewportPos.y <= 1;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(key))
@@ -40,21 +50,16 @@ public class PullingGun : MonoBehaviour
             Vector2 _direction = _mousePos - firePoint.position;
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);
 
-            if (_hit)
+            if (_hit.collider && IsPointOnScreen(_hit.point))
             {
-                float _distance = _hit.distance;
-                if (_distance < maxDistance)
-                {
-                    isGrappedToNothing = false;
-                    Grapple(_hit.point);
-                }
-                else
-                {
-                    isGrappedToNothing = true;
-                    Vector2 _newDir = new Vector2(_direction.normalized.x * maxDistance, _direction.normalized.y * maxDistance);
-                    Vector2 _newPos = new Vector2(firePoint.position.x + _newDir.x, firePoint.position.y + _newDir.y);
-                    Grapple(_newPos);
-                }
+                isGrappedToNothing = false;
+                Grapple(_hit.point);
+            } else
+            {
+                isGrappedToNothing = true;
+                Vector2 _newDir = new Vector2(_direction.normalized.x * MAX_DIST, _direction.normalized.y * MAX_DIST);
+                Vector2 _newPos = new Vector2(firePoint.position.x + _newDir.x, firePoint.position.y + _newDir.y);
+                Grapple(_newPos);
             }
         }
         if (Input.GetKeyUp(key))
@@ -108,7 +113,6 @@ public class PullingGun : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, maxDistance);
         Gizmos.DrawWireSphere(transform.position, distanceRelease);
     }
 }
