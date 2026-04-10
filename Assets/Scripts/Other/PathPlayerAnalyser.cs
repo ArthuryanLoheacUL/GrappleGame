@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System.Collections;
 
 public class PathPlayerAnalyser : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private float delayShowPath = 0.05f;
+    [SerializeField] private int showedImages = 5;
     private bool recording = false;
     [SerializeField] private float delayImages = 0.5f;
     float timerImages = 0;
@@ -51,12 +53,19 @@ public class PathPlayerAnalyser : MonoBehaviour
     {
         StopRecording();
         lineRenderer.enabled = true;
-        int _nbSegments = positions.Count;
-        lineRenderer.positionCount = _nbSegments;
+
+        StartCoroutine(ProgressiveShow());
+    }
+
+    IEnumerator ProgressiveShow()
+    {
         int _i = 0;
         foreach (Vector2 _segment in positions)
         {
+            lineRenderer.positionCount = _i + 1;
             lineRenderer.SetPosition(_i, _segment);
+            if (_i % showedImages == 0)
+                yield return new WaitForSeconds(delayShowPath);
             _i++;
         }
     }
