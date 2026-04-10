@@ -5,6 +5,7 @@ public class FinalCameraPos : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private float originalOrthographicSize = 12f;
+    [SerializeField] private PathPlayerAnalyser pathPlayer;
 
     [Header("Final Pos")]
     [SerializeField] private Vector2 finalPosition = Vector2.zero;
@@ -67,12 +68,18 @@ public class FinalCameraPos : MonoBehaviour
             if (timer >= animationTime)
             {
                 _t = 1f;
-                onTransition = false;
+                OnArrivedFinalPos();
             }
             cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(startOrthoSizeAnimation, finalOrthographicSize, _t);
             Vector3 _finalPos = Vector3.Lerp(startPosAnimation, finalPosition, _t);
             _finalPos.z = -10;
             cinemachineCamera.transform.position = _finalPos;
         }
+    }
+
+    void OnArrivedFinalPos()
+    {
+        onTransition = false;
+        pathPlayer.ShowPath();
     }
 }
