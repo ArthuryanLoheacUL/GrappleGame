@@ -52,7 +52,7 @@ public class GrapplingGun : MonoBehaviour
             if (_distance <= distanceWithGrappedPoint)
             {
                 distanceWithGrappedPoint = _distance;
-            } else
+            } else if (_distance - distanceWithGrappedPoint >= 0.1f)
             {
                 InitJointGrapple();
             }
@@ -90,18 +90,12 @@ public class GrapplingGun : MonoBehaviour
         joint = player.gameObject.AddComponent<SpringJoint2D>();
         joint.autoConfigureConnectedAnchor = false;
         joint.enableCollision = true;
-
-        // En 2D, connectedAnchor est un Vector2
         joint.connectedAnchor = grapplePoint;
 
         float _distanceFromPoint = Vector2.Distance(player.position, grapplePoint);
-
-        // Distance que le grappin va maintenir
         joint.distance = _distanceFromPoint;
-
-        // Paramètres physiques
-        joint.frequency = 4.5f;   // équivalent du "spring"
-        joint.dampingRatio = 0.7f; // équivalent du "damper"
+        joint.frequency = 4.5f;
+        joint.dampingRatio = 0.7f;
     }
 
     public void StopGrapple()
@@ -110,5 +104,11 @@ public class GrapplingGun : MonoBehaviour
         isGrapped = false;
         grappleDistanceVector = Vector2.zero;
         Destroy(joint);
+    }
+
+    public void DestroyJoint(Collision2D _collision)
+    {
+        Destroy(joint);
+        distanceWithGrappedPoint = Vector2.Distance(player.transform.position, grapplePoint);
     }
 }
