@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 462470869768328366}
   - component: {fileID: 6465222429535960833}
   - component: {fileID: 3676376986335251321}
+  - component: {fileID: 7675736112371330144}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -662,6 +663,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   grabGun: {fileID: 889346347856494169}
+--- !u!114 &7675736112371330144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817319171050454735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ebdc90496e0e124fa3581e4eef2fc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  direction: {x: 0.24, y: 0.12}
+  speed: 19.9
+  rb: {fileID: 7493217921713181770}
+  steps: 14
+  timeStep: 0.1
 --- !u!1 &2285869265802882994
 GameObject:
   m_ObjectHideFlags: 0
