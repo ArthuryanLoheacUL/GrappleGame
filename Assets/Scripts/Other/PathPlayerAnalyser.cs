@@ -16,13 +16,11 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     [Header("Show Params")]
     [SerializeField] private GameObject prefabLinePath;
+    [SerializeField] private GameObject prefabLinePathCurrent;
+    [SerializeField] private GameObject prefabLinePathBest;
     [SerializeField] private float delayShowPath = 0.05f;
     [SerializeField] private int showedImages = 5;
-
-    [Header("Colors")]
-    [SerializeField] private Gradient gradientCurrent;
-    [SerializeField] private Gradient gradientPreviousRun;
-
+    int idBest = -1;
 
     private void Awake()
     {
@@ -47,12 +45,15 @@ public class PathPlayerAnalyser : MonoBehaviour
         StartRecording();
     }
 
-    public void StopRecording()
+    public void StopRecording(bool _isBest = false)
     {
-        if (recording)
-            TakeImage();
+        if (!recording)
+            return;
+        TakeImage();
         recording = false;
         positions.Add(new List<Vector2>(current_positions));
+        if (_isBest)
+            idBest = positions.Count - 1;
     }
 
     public void ClearImages()
@@ -97,19 +98,20 @@ public class PathPlayerAnalyser : MonoBehaviour
 
         for (int _i = 0; _i < positions.Count; _i++)
         {
-            Gradient _gradient = gradientPreviousRun;
+            GameObject _prefab = prefabLinePath;
             if (_i == positions.Count - 1)
-                _gradient = gradientCurrent; 
+                _prefab = prefabLinePathCurrent;
+            else if (_i == idBest)
+                _prefab = prefabLinePathBest;
 
-            StartCoroutine(ProgressiveShow(positions[_i], _gradient));
+            StartCoroutine(ProgressiveShow(positions[_i], _prefab));
         }
     }
 
-    IEnumerator ProgressiveShow(List<Vector2> _positions, Gradient _gradient)
+    IEnumerator ProgressiveShow(List<Vector2> _positions, GameObject _prefab)
     {
-        GameObject _linePath = Instantiate(prefabLinePath, transform);
+        GameObject _linePath = Instantiate(_prefab, transform);
         LineRenderer _lineRenderer = _linePath.GetComponent<LineRenderer>();
-        _lineRenderer.colorGradient = _gradient;
 
         int _i = 0;
         foreach (Vector2 _segment in _positions)

@@ -12,15 +12,14 @@ public class ActivePlayer : MonoBehaviour
             _obj.SetActive(false);
         GetComponent<DieFromSpeed>().enabled = false;
         GetComponent<SpeedPlayerManager>().enabled = false;
-        PathPlayerAnalyser.instance.StopRecording();
         finalCameraPos.ActiveFinalCam();
     }
 
     public void Die()
     {
         Instantiate(prefabExplosion, transform.position, Quaternion.identity);
-        finalCameraPos.ActiveFinalCam();
         GameManager.instance.GameEnd(false);
+        finalCameraPos.ActiveFinalCam();
         Destroy(gameObject);
     }
 }

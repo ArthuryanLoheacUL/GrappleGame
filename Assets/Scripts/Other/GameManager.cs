@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd(bool _isWin)
     {
+        bool _isPB = false;
+
         inGame = false;
         if (timerManager)
             timerManager.StopTimer();
@@ -59,7 +61,9 @@ public class GameManager : MonoBehaviour
             if (timerManager.GetTime() < bestTime || bestTime == 0f)
             {
                 PlayerPrefs.SetFloat("PB_" + SceneManager.GetActiveScene().name, timerManager.GetTime());
+                _isPB = true;
             }
         }
+        PathPlayerAnalyser.instance.StopRecording(_isPB);
     }
 }
