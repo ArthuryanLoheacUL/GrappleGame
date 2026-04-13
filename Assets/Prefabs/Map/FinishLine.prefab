@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42bd253762b5c2547a5dc22c4771301c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  finishSound: {fileID: 8300000, guid: da092173b9c0b6e4a883dc4377982331, type: 3}
+  volume: 0.5
 --- !u!114 &7077270835759463602
 MonoBehaviour:
   m_ObjectHideFlags: 0
