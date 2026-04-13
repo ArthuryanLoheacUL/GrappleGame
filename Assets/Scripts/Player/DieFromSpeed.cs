@@ -49,6 +49,7 @@ public class DieFromSpeed : MonoBehaviour
     {
         Instantiate(prefabExplosion, transform.position, Quaternion.identity);
         finalCameraPos.ActiveFinalCam();
+        GameManager.instance.GameEnd(false);
         Destroy(gameObject);
     }
 }

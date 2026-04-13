@@ -3,8 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    [HideInInspector] public bool inGame = true;
+    float timerInGameOver = 0f;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void Restart()
     {
+        timerInGameOver = 0f;
         PathPlayerAnalyser.instance.StopRecording();
         PathPlayerAnalyser.instance.HidePath();
         string _currentSceneName = SceneManager.GetActiveScene().name;
@@ -14,13 +24,25 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         PathPlayerAnalyser.instance.StartNewRecording();
+        inGame = true;
     }
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.R))
+        if (!inGame)
+        {
+            timerInGameOver += Time.deltaTime;
+        }
+
+        if ((Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1)) && !inGame && timerInGameOver > 1f
+            || Input.GetKeyUp(KeyCode.R)) 
         {
             Restart();
         }
+    }
+
+    public void GameEnd(bool _isWin)
+    {
+        inGame = false;
     }
 }

@@ -11,7 +11,7 @@ abstract public class GunScript : MonoBehaviour
 
     [Header("Pull Grappin Settings")]
     [SerializeField] private LayerMask layers;
-    [SerializeField] private KeyCode key;
+    [SerializeField] private KeyCode[] keys;
     const float MAX_DIST = 20f;
 
     [Header("Private Params & States:")]
@@ -79,17 +79,53 @@ abstract public class GunScript : MonoBehaviour
         }
     }
 
+    bool IsKeysDown()
+    {
+        foreach (var _key in keys)
+        {
+            if (Input.GetKeyDown(_key))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsKeysUp()
+    {
+        foreach (var _key in keys)
+        {
+            if (Input.GetKeyUp(_key))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsKeys()
+    {
+        foreach (var _key in keys)
+        {
+            if (Input.GetKey(_key))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (IsKeysDown())
         {
             Shoot();
         }
-        if (Input.GetKeyUp(key))
+        if (IsKeysUp())
         {
             UnGrapple();
         }
-        if (Input.GetKey(key) && isGrappled && isActive && !isGrappedToNothing)
+        if (IsKeys() && isGrappled && isActive && !isGrappedToNothing)
         {
             OnActive();
         }

@@ -6,18 +6,20 @@ public class PathPlayerAnalyser : MonoBehaviour
 {
     public static PathPlayerAnalyser instance;
 
+    [Header("Captures Params")]
+    [SerializeField] private float delayImages = 0.5f;
     private Transform player;
+    private bool recording = false;
+    private float timerImages = 0;
+    private List<Vector2> current_positions = new List<Vector2>();
+    private List<List<Vector2>> positions = new List<List<Vector2>>();
+
+    [Header("Show Params")]
+    [SerializeField] private GameObject prefabLinePath;
     [SerializeField] private float delayShowPath = 0.05f;
     [SerializeField] private int showedImages = 5;
-    private bool recording = false;
-    [SerializeField] private float delayImages = 0.5f;
-    float timerImages = 0;
 
-    List<Vector2> current_positions = new List<Vector2>();
-    List<List<Vector2>> positions = new List<List<Vector2>>();
-
-    [SerializeField] private GameObject prefabLinePath;
-
+    [Header("Colors")]
     [SerializeField] private Gradient gradientCurrent;
     [SerializeField] private Gradient gradientPreviousRun;
 
