@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [HideInInspector] public bool inGame = true;
+    [SerializeField] private TimerManager timerManager;
     float timerInGameOver = 0f;
 
     private void Awake()
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         PathPlayerAnalyser.instance.StartNewRecording();
         inGame = true;
+        if (timerManager)
+            timerManager.StartTimer();
     }
 
     void Update()
@@ -44,5 +47,7 @@ public class GameManager : MonoBehaviour
     public void GameEnd(bool _isWin)
     {
         inGame = false;
+        if (timerManager)
+            timerManager.StopTimer();
     }
 }
