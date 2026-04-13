@@ -55,10 +55,14 @@ public class GameManager : MonoBehaviour
 
         inGame = false;
         if (timerManager)
+        {
             timerManager.StopTimer();
+            if (_isWin)
+                timerManager.ShowDiff();
+        }
         if (_isWin)
         {
-            if (timerManager.GetTime() < bestTime || bestTime == 0f)
+            if ((timerManager.GetTime() < bestTime && bestTime - timerManager.GetTime() > 0.01) || bestTime == 0f)
             {
                 PlayerPrefs.SetFloat("PB_" + SceneManager.GetActiveScene().name, timerManager.GetTime());
                 _isPB = true;
