@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 1
-  controlID: 143618
+  controlID: 166437
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 143619
+  controlID: 166438
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 143620
+  controlID: 166439
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 56}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 143621
+  controlID: 166440
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -226,8 +226,8 @@ MonoBehaviour:
     y: 0
     width: 184
     height: 708
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 7}
   m_Panes:
   - {fileID: 7}
@@ -273,11 +273,12 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 160}
+      scrollPos: {x: 0, y: 171}
       m_SelectedIDs: []
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
+      - m_Data: -533798
       - m_Data: -276766
       - m_Data: -274428
       - m_Data: -262530
@@ -2423,9 +2424,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 35.38253, y: 166.21245, z: 0.20122014}
+    m_Target: {x: 37.64084, y: 162.08496, z: 136.80997}
     speed: 2
-    m_Value: {x: 35.38253, y: 166.21245, z: 0.20122014}
+    m_Value: {x: 37.64084, y: 162.08496, z: 136.80997}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2475,9 +2476,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 13.097656
+    m_Target: 11.61492
     speed: 2
-    m_Value: 13.097656
+    m_Value: 11.61492
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -2556,8 +2557,8 @@ MonoBehaviour:
     y: 708
     width: 1544
     height: 225
-  m_MinSize: {x: 231, y: 276}
-  m_MaxSize: {x: 10001, y: 10026}
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -2614,7 +2615,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Map
+    - Assets/Materials
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -2624,7 +2625,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Prefabs/Map
+  - Assets/Materials
   m_LastFoldersGridSize: 60
   m_LastProjectPath: C:\Users\PC_DE_BOUHDA\GrappleGame
   m_LockTracker:
@@ -2633,13 +2634,12 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 61}
     m_SelectedIDs:
-    - m_Data: 191498
+    - m_Data: 51342
     m_LastClickedID:
-      m_Data: 191498
+      m_Data: 51342
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 51026
-    - m_Data: 51344
     - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2702,8 +2702,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -24960
-    m_LastClickedInstanceID: -24960
+    - m_Data: -533798
+    m_LastClickedInstanceID: -533798
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs:
     - m_Data: 75794
@@ -2724,6 +2724,7 @@ MonoBehaviour:
     - m_Data: 49192
     - m_Data: 71232
     - m_Data: 225796
+    - m_Data: 265746
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2851,8 +2852,8 @@ MonoBehaviour:
     y: 0
     width: 376
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -2899,10 +2900,10 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: -225
+    m_CachedPref: 265
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -24960
+  m_LastInspectedObjectInstanceID: -533798
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
