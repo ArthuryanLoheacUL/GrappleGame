@@ -10,10 +10,8 @@ public class SpeedMeter : MonoBehaviour
     [SerializeField] private TMP_Text speedText;
 
     [SerializeField] private Image barSpeed;
-    [SerializeField] private Image barMaxSpeed;
     private Color barOriginalColor;
-
-    [SerializeField] private Color basicColor;
+    private Color basicColor;
 
     private Rigidbody2D playerRb;
     private SpeedPlayerManager speedPlayerManager;
@@ -23,6 +21,7 @@ public class SpeedMeter : MonoBehaviour
         playerRb = player.GetComponent<Rigidbody2D>();
         speedPlayerManager = player.GetComponent<SpeedPlayerManager>();
         barOriginalColor = barSpeed.color;
+        basicColor = speedFillImg.color;
     }
 
     private void Update()
@@ -50,18 +49,10 @@ public class SpeedMeter : MonoBehaviour
         {
             SetColor(basicColor);
             barSpeed.color = barOriginalColor;
-            barMaxSpeed.color = barOriginalColor;
-        }
-        else if (_speed > speedPlayerManager.maxSpeedColorThreshold)
-        {
-            SetColor(speedPlayerManager.maxSpeedColor);
-            barSpeed.color = speedPlayerManager.maxSpeedColor;
-            barMaxSpeed.color = speedPlayerManager.maxSpeedColor;
         } else
         {
             SetColor(speedPlayerManager.speedColor);
             barSpeed.color = speedPlayerManager.speedColor;
-            barMaxSpeed.color = barOriginalColor;
         }
     }
 

@@ -9,11 +9,9 @@ public class SpeedPlayerManager : MonoBehaviour
 
     [SerializeField] private Color underSpeedColor;
     [SerializeField] public Color speedColor;
-    [SerializeField] public Color maxSpeedColor;
 
     public float speedThreshold;
     [SerializeField] public float maxSpeed;
-    [SerializeField] public float maxSpeedColorThreshold;
 
     [SerializeField] private Rigidbody2D rb;
 
@@ -35,10 +33,6 @@ public class SpeedPlayerManager : MonoBehaviour
         if (_magnitude < speedThreshold)
         {
             stateSpeed = StateSpeed.Slow;
-        }
-        else if (_magnitude > maxSpeedColorThreshold)
-        {
-            stateSpeed = StateSpeed.Max;
         }
         else
         {
@@ -69,9 +63,6 @@ public class SpeedPlayerManager : MonoBehaviour
         {
             case StateSpeed.Normal:
                 SetColor(speedColor);
-                break;
-            case StateSpeed.Max:
-                SetColor(maxSpeedColor);
                 break;
             case StateSpeed.Slow:
                 SetColor(underSpeedColor);
@@ -117,7 +108,7 @@ public class SpeedPlayerManager : MonoBehaviour
             lightBall.enabled = true;
             if (stateSpeed == StateSpeed.Normal)
             {
-                float _t = rb.linearVelocity.magnitude - speedThreshold / maxSpeedColorThreshold - speedThreshold;
+                float _t = rb.linearVelocity.magnitude - speedThreshold / maxSpeed - speedThreshold;
                 trailRenderer.widthCurve = BlendCurves(trailSpeed, trailSpeedMax, _t);
                 trailRenderer.time = lengthCurve.Evaluate(mergeTrailCurve.Evaluate(_t));
             }

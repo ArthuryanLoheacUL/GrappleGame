@@ -39,7 +39,8 @@ abstract public class GunScript : MonoBehaviour
     RaycastHit2D GetSnappedShoot(Vector2 _direction)
     {
         float[] _angles = { -5, -4, -3, -2, -1, 1, 2, 3, 4, 5 };
-        RaycastHit2D _minHit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);
+        RaycastHit2D _originalHit = Physics2D.Raycast(firePoint.position, _direction.normalized, Mathf.Infinity, layers);
+        RaycastHit2D _minHit = _originalHit;
         float _minDistance = float.MaxValue;
         if (_minHit.collider)
             _minDistance = _minHit.distance;
@@ -54,6 +55,8 @@ abstract public class GunScript : MonoBehaviour
                 _minHit = _hit;
             }
         }
+        if (_originalHit.collider && Vector2.Distance(_minHit.point, _originalHit.point) <= 2f)
+            return _originalHit;
         return _minHit;
     }
 
