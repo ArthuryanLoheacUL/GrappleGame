@@ -9,7 +9,6 @@ public class DieFromSpeed : MonoBehaviour
     public float durationBeforeDeath = 0f;
 
     [SerializeField] private Image spriteDie;
-    [SerializeField] private GameObject prefabExplosion;
     [SerializeField] private FinalCameraPos finalCameraPos;
 
     private void Awake()
@@ -31,7 +30,7 @@ public class DieFromSpeed : MonoBehaviour
         }
         if (timer >= durationBeforeDeath)
         {
-            DestroyBall();
+            GetComponent<ActivePlayer>().Die();
         }
         if (timer > 0f)
         {
@@ -45,11 +44,4 @@ public class DieFromSpeed : MonoBehaviour
         }
     }
 
-    void DestroyBall()
-    {
-        Instantiate(prefabExplosion, transform.position, Quaternion.identity);
-        finalCameraPos.ActiveFinalCam();
-        GameManager.instance.GameEnd(false);
-        Destroy(gameObject);
-    }
 }

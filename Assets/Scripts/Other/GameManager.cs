@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool inGame = true;
     [SerializeField] private TimerManager timerManager;
     float timerInGameOver = 0f;
+    float bestTime = 0f;
 
     private void Awake()
     {
@@ -24,10 +25,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        bestTime = PlayerPrefs.GetFloat("PB_" + SceneManager.GetActiveScene().name, 0);
         PathPlayerAnalyser.instance.StartNewRecording();
         inGame = true;
         if (timerManager)
+        {
+            timerManager.SetBestTimeText(bestTime);
             timerManager.StartTimer();
+        }
     }
 
     void Update()
@@ -49,5 +54,12 @@ public class GameManager : MonoBehaviour
         inGame = false;
         if (timerManager)
             timerManager.StopTimer();
+        if (_isWin)
+        {
+            if (timerManager.GetTime() < bestTime || bestTime == 0f)
+            {
+                PlayerPrefs.SetFloat("PB_" + SceneManager.GetActiveScene().name, timerManager.GetTime());
+            }
+        }
     }
 }

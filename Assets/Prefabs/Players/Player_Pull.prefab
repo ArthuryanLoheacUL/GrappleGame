@@ -112,9 +112,9 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 773339163
+  m_SortingLayer: 2
+  m_SortingOrder: -2
   m_MaskInteraction: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 9041913088368340373}
   - component: {fileID: 4378103810928205337}
   - component: {fileID: 5461075805211686132}
+  - component: {fileID: 5652960759291723147}
   m_Layer: 0
   m_Name: Player_Pull
   m_TagString: Player
@@ -488,7 +489,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.49999997
+  m_Radius: 0.45595354
 --- !u!114 &9041913088368340373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,7 +621,6 @@ MonoBehaviour:
   timer: 0
   durationBeforeDeath: 3
   spriteDie: {fileID: 7277005186926016268}
-  prefabExplosion: {fileID: 5512710540585398210, guid: e597e2d5794d7334bac7c1cbdfc03905, type: 3}
   finalCameraPos: {fileID: 0}
 --- !u!114 &5461075805211686132
 MonoBehaviour:
@@ -639,6 +639,22 @@ MonoBehaviour:
   rb: {fileID: 550983805989481610}
   steps: 14
   timeStep: 0.1
+--- !u!114 &5652960759291723147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788129251792661704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fd5031e066c5448a36fa084b85c53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  toDesactivate:
+  - {fileID: 847909745537640791}
+  finalCameraPos: {fileID: 0}
+  prefabExplosion: {fileID: 5512710540585398210, guid: e597e2d5794d7334bac7c1cbdfc03905, type: 3}
 --- !u!1 &7621651918346690259
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,9 +794,9 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 773339163
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Time: 0.15
   m_PreviewTimeScale: 1
@@ -872,10 +888,10 @@ MonoBehaviour:
   m_Intensity: 3
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000035410504
+  m_ApplyToSortingLayers: 0000000035410504bdc6d7f9
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: -1
+  m_LightOrder: 1
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
