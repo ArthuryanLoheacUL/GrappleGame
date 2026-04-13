@@ -8,12 +8,12 @@ public class SpeedPlayerManager : MonoBehaviour
     [SerializeField] private Light2D lightBall;
 
     [SerializeField] private Color underSpeedColor;
-    [SerializeField] private Color speedColor;
-    [SerializeField] private Color maxSpeedColor;
+    [SerializeField] public Color speedColor;
+    [SerializeField] public Color maxSpeedColor;
 
     public float speedThreshold;
     [SerializeField] public float maxSpeed;
-    [SerializeField] private float maxSpeedColorThreshold;
+    [SerializeField] public float maxSpeedColorThreshold;
 
     [SerializeField] private Rigidbody2D rb;
 
