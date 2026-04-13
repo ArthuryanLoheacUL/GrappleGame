@@ -49,6 +49,8 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     public void StopRecording()
     {
+        if (recording)
+            TakeImage();
         recording = false;
         positions.Add(new List<Vector2>(current_positions));
     }
@@ -71,8 +73,7 @@ public class PathPlayerAnalyser : MonoBehaviour
             timerImages += Time.deltaTime;
             if (timerImages > delayImages)
             {
-                timerImages = 0;
-                current_positions.Add(player.position);
+                TakeImage();
             }
         } else
         {
@@ -80,9 +81,19 @@ public class PathPlayerAnalyser : MonoBehaviour
         }
     }
 
+    void TakeImage()
+    {
+        if (!player)
+            return;
+
+        timerImages = 0;
+        current_positions.Add(player.position);
+    }
+
     public void ShowPath()
     {
-        StopRecording();
+        if (recording)
+            StopRecording();
 
         for (int _i = 0; _i < positions.Count; _i++)
         {

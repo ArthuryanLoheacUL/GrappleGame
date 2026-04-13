@@ -401,7 +401,6 @@ GameObject:
   - component: {fileID: 2797886313826922824}
   - component: {fileID: 9041913088368340373}
   - component: {fileID: 4378103810928205337}
-  - component: {fileID: 8058127362263857806}
   - component: {fileID: 5461075805211686132}
   m_Layer: 0
   m_Name: Player_Pull
@@ -507,10 +506,8 @@ MonoBehaviour:
   lightBall: {fileID: 1142284795921501393}
   underSpeedColor: {r: 0.09803922, g: 0.078431375, b: 0.078431375, a: 1}
   speedColor: {r: 0.9529412, g: 0.654902, b: 0.5294118, a: 1}
-  maxSpeedColor: {r: 0.36862746, g: 0.99215686, b: 0.96862745, a: 1}
   speedThreshold: 15
   maxSpeed: 40
-  maxSpeedColorThreshold: 27.5
   rb: {fileID: 550983805989481610}
   trailSpeed:
     serializedVersion: 2
@@ -625,19 +622,6 @@ MonoBehaviour:
   spriteDie: {fileID: 7277005186926016268}
   prefabExplosion: {fileID: 5512710540585398210, guid: e597e2d5794d7334bac7c1cbdfc03905, type: 3}
   finalCameraPos: {fileID: 0}
---- !u!114 &8058127362263857806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788129251792661704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 747a0588581cf644a95d30d61e86519f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  grabGun: {fileID: 0}
 --- !u!114 &5461075805211686132
 MonoBehaviour:
   m_ObjectHideFlags: 0

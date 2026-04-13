@@ -49,9 +49,12 @@ public class FinalCameraPos : MonoBehaviour
 
     public void ActiveFinalCam()
     {
-        cinemachineCamera.Follow = null;
-        startPosAnimation = cinemachineCamera.transform.position;
-        startOrthoSizeAnimation = cinemachineCamera.Lens.OrthographicSize;
+        if (cinemachineCamera)
+        {
+            cinemachineCamera.Follow = null;
+            startPosAnimation = cinemachineCamera.transform.position;
+            startOrthoSizeAnimation = cinemachineCamera.Lens.OrthographicSize;
+        }
         onTransition = true;
         timer = 0;
     }
