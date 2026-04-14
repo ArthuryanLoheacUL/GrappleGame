@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PathPlayerAnalyser : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class PathPlayerAnalyser : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        LoadBestSave();
+    }
+
     public void StartRecording()
     {
         recording = true;
@@ -53,7 +59,10 @@ public class PathPlayerAnalyser : MonoBehaviour
         recording = false;
         positions.Add(new List<Vector2>(current_positions));
         if (_isBest)
+        {
             idBest = positions.Count - 1;
+            PlayerSaveBest();
+        }
     }
 
     public void ClearImages()
@@ -130,5 +139,33 @@ public class PathPlayerAnalyser : MonoBehaviour
         int _childs = transform.childCount;
         for (int _i = 0; _i < _childs; _i++)
             Destroy(transform.GetChild(_i).gameObject);
+    }
+
+    void PlayerSaveBest()
+    {
+        List<Vector2> _pos = positions[idBest];
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_PB_Count", _pos.Count);
+        for (int _i = 0; _i < _pos.Count; _i++)
+        {
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_x", _pos[_i].x);
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_y", _pos[_i].y);
+        }
+    }
+
+    void LoadBestSave()
+    {
+        List<Vector2> _pos = new List<Vector2>();
+        int _c = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_PB_Count", -1);
+        if (_c == -1)
+            return;
+        for (int  _i = 0; _i < _c; _i++)
+        {
+            Vector2 _point;
+            _point.x = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_x", 0);
+            _point.y = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_y", 0);
+            _pos.Add( _point );
+        }
+        positions.Add(_pos);
+        idBest = positions.Count - 1;
     }
 }
