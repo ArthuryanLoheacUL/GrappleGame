@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2684819120435471858}
   - component: {fileID: 6618602293176517042}
   - component: {fileID: 3786781021255757328}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Clou (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
