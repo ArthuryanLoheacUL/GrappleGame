@@ -22,6 +22,9 @@ public class FlyOnCollidePlayer : MonoBehaviour
             _vel = (_vel.normalized) + Vector2.up;
             float _speed = Random.Range(speedJumpFactorMin, speedJumpFactorMax);
             rb.linearVelocity = _vel.normalized * _speed * _playerRB.linearVelocity.magnitude;
+
+            int _r = Random.Range(1, 3);
+            SoundManager.instance.PlayOneShot("Cling" + _r.ToString(), 5, 0.1f);
         }
     }
 }
