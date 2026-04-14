@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.IO;
 
 [System.Serializable]
 public struct Sound
@@ -47,9 +46,12 @@ public class SoundManager : MonoBehaviour
 
     bool GetSound(string _name, out Sound _soundOut)
     {
+        string _nameTrim = _name.TrimEnd(new char[] { '\r', ' ' });
         foreach (var _sound in sounds)
         {
-            if (_sound.name == name)
+            string _soundNameTrim = _sound.name.TrimEnd(new char[] { '\r', ' ' });
+
+            if (_nameTrim == _soundNameTrim)
             {
                 _soundOut = _sound;
                 return true;
@@ -68,8 +70,10 @@ public class SoundManager : MonoBehaviour
         }
         AudioSource _audioSource = audioSources[_canal];
         Sound _s;
+        Debug.Log("SOUND");
         if (!GetSound(_name, out _s))
            return;
+        Debug.Log("SOUND 2");
         _audioSource.pitch = _s.pitch;
         _audioSource.PlayOneShot(_s.clip, _s.volume);
     }
