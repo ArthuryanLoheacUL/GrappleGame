@@ -61,7 +61,23 @@ public class SoundManager : MonoBehaviour
         return false;
     }
 
-    AudioSource GetCanal(int _canal)
+    public float GetDurationSound(string _name)
+    {
+        Sound _s;
+        if (GetSound(_name, out _s))
+            return _s.clip.length;
+        return 0f;
+    }
+    public float GetVolumeSound(string _name)
+    {
+        Sound _s;
+        if (GetSound(_name, out _s))
+            return _s.volume;
+        return 0f;
+    }
+
+
+    public AudioSource GetCanal(int _canal)
     {
         if (_canal >= audioSources.Count)
         {

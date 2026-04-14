@@ -7,7 +7,7 @@ public class DieFromSpeed : MonoBehaviour
     Rigidbody2D rb;
     [HideInInspector] public float timer = 0f;
     public float durationBeforeDeath = 0f;
-    public bool isDying = false;
+    [HideInInspector] public bool isDying = false;
 
     [SerializeField] private Image spriteDie;
     [SerializeField] private FinalCameraPos finalCameraPos;
