@@ -69,8 +69,7 @@ public class RopeGun : MonoBehaviour
                 else
                 {
                     CineShakeManager.instance.Shake(0.1f, 1.5f);
-                    if (GetComponent<GunSound>())
-                        GetComponent<GunSound>().PlayOnGrab();
+                    SoundManager.instance.PlayOneShot("Grab", 3, 0.1f);
                 }
             }
             else

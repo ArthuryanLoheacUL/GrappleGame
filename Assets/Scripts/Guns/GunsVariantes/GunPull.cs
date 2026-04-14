@@ -13,6 +13,8 @@ public class GunPull : GunScript
 
     public override void UnGrapple()
     {
+        if (isGrappled)
+            SoundManager.instance.PlayOneShot("ChainRelease", 3, 0.1f);
         base.UnGrapple();
     }   
 

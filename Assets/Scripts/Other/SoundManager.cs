@@ -71,13 +71,13 @@ public class SoundManager : MonoBehaviour
         return audioSources[_canal];
     }
 
-    public void PlayOneShot(string _name, int _canal)
+    public void PlayOneShot(string _name, int _canal, float _rangePitch = 0f)
     {
         AudioSource _audioSource = GetCanal(_canal);
         Sound _s;
         if (!GetSound(_name, out _s))
             return;
-        _audioSource.pitch = _s.pitch;
+        _audioSource.pitch = _s.pitch + Random.Range(-_rangePitch, _rangePitch);
         _audioSource.PlayOneShot(_s.clip, _s.volume);
     }
     public void PlayCanal(string _name, int _canal, bool _loop = false)

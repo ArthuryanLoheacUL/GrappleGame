@@ -17,7 +17,7 @@ abstract public class GunScript : MonoBehaviour
     [Header("Private Params & States:")]
     [HideInInspector] public Vector2 grappledPoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
-    private bool isGrappled;
+    protected bool isGrappled;
     [HideInInspector] public bool isGrappedToNothing;
     private bool isActive;
 
@@ -62,8 +62,7 @@ abstract public class GunScript : MonoBehaviour
 
     void Shoot()
     {
-        if (GetComponent<GunSound>())
-            GetComponent<GunSound>().PlayOnShoot();
+        SoundManager.instance.PlayOneShot("Shoot", 3, 0.1f);
 
         Vector2 _direction = cam.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
         RaycastHit2D _hit = GetSnappedShoot(_direction);

@@ -621,6 +621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   timer: 0
   durationBeforeDeath: 3
+  isDying: 0
   spriteDie: {fileID: 7277005186926016268}
   finalCameraPos: {fileID: 0}
 --- !u!114 &5461075805211686132
@@ -5771,7 +5772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1cbdd396b8ddc24a85a575d6b899ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speedPlayerManager: {fileID: 9041913088368340373}
+  dieFromSpeed: {fileID: 4378103810928205337}
   rb: {fileID: 550983805989481610}
   emissionCurve:
     serializedVersion: 2
@@ -5797,7 +5798,56 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxEmission: 20
+  maxEmission: 10
+  soundCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxVolumeSound: 0.2
+  pitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0000000027939677
+      value: 0.9289738
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0100043
+      value: 1.4964627
+      inSlope: 0.62261045
+      outSlope: 0.62261045
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1467034
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8473022996395661799
 GameObject:
   m_ObjectHideFlags: 0
