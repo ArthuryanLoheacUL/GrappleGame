@@ -61,18 +61,61 @@ public class SoundManager : MonoBehaviour
         return false;
     }
 
-    public void PlayOneShot(string _name, int _canal)
+    AudioSource GetCanal(int _canal)
     {
         if (_canal >= audioSources.Count)
         {
             for (int _i = audioSources.Count - 1; _i < _canal; _i++)
                 AddAudioSource();
         }
-        AudioSource _audioSource = audioSources[_canal];
+        return audioSources[_canal];
+    }
+
+    public void PlayOneShot(string _name, int _canal)
+    {
+        AudioSource _audioSource = GetCanal(_canal);
         Sound _s;
         if (!GetSound(_name, out _s))
-           return;
+            return;
         _audioSource.pitch = _s.pitch;
         _audioSource.PlayOneShot(_s.clip, _s.volume);
+    }
+    public void PlayCanal(string _name, int _canal, bool _loop = false)
+    {
+        AudioSource _audioSource = GetCanal(_canal);
+        Sound _s;
+        if (!GetSound(_name, out _s))
+            return;
+        _audioSource.pitch = _s.pitch;
+        _audioSource.clip = _s.clip;
+        _audioSource.volume = _s.volume;
+        _audioSource.loop = _loop;
+        _audioSource.Play();
+    }
+
+    public void RestartAudioCanal(int _canal)
+    {
+        AudioSource _audioSource = GetCanal(_canal);
+        _audioSource.Stop();
+        _audioSource.clip = _audioSource.clip;
+        _audioSource.Play();
+    }
+
+    public void SetVolumeCanal(int _canal, float _volume)
+    {
+        AudioSource _audioSource = GetCanal(_canal);
+        _audioSource.volume = _volume;
+    }
+
+    public void SetPitchCanal(int _canal, float _pitch)
+    {
+        AudioSource _audioSource = GetCanal(_canal);
+        _audioSource.pitch = _pitch;
+    }
+
+    public void StopAudioCanal(int _canal)
+    {
+        AudioSource _audioSource = GetCanal(_canal);
+        _audioSource.Stop();
     }
 }

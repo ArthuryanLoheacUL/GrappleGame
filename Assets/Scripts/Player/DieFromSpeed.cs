@@ -7,6 +7,7 @@ public class DieFromSpeed : MonoBehaviour
     Rigidbody2D rb;
     [HideInInspector] public float timer = 0f;
     public float durationBeforeDeath = 0f;
+    public bool isDying = false;
 
     [SerializeField] private Image spriteDie;
     [SerializeField] private FinalCameraPos finalCameraPos;
@@ -24,12 +25,15 @@ public class DieFromSpeed : MonoBehaviour
         if (_magnitude < playerManager.speedThreshold)
         {
             timer += Time.deltaTime;
+            isDying = true;
         } else
         {
             timer -= Time.deltaTime;
+            isDying = false;
         }
         if (timer >= durationBeforeDeath)
         {
+            isDying = false;
             GetComponent<ActivePlayer>().Die();
         }
         if (timer > 0f)
@@ -41,6 +45,7 @@ public class DieFromSpeed : MonoBehaviour
         {
             spriteDie.enabled = false;
             timer = 0f;
+            isDying = false;
         }
     }
 
