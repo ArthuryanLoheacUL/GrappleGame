@@ -70,10 +70,8 @@ public class SoundManager : MonoBehaviour
         }
         AudioSource _audioSource = audioSources[_canal];
         Sound _s;
-        Debug.Log("SOUND");
         if (!GetSound(_name, out _s))
            return;
-        Debug.Log("SOUND 2");
         _audioSource.pitch = _s.pitch;
         _audioSource.PlayOneShot(_s.clip, _s.volume);
     }

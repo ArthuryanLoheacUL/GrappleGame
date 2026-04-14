@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7630577274402236827}
   - component: {fileID: 4262961420176380927}
   - component: {fileID: 7697031387233912055}
+  - component: {fileID: 5415571918241371807}
   m_Layer: 0
   m_Name: ExplosionDiePlayer
   m_TagString: Untagged
@@ -4908,3 +4909,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   destroyInX: 2
+--- !u!114 &5415571918241371807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5512710540585398210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c6ec1c440345a47abb27510873d3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  soundName: Explode
