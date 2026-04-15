@@ -21,6 +21,7 @@ public class PathPlayerAnalyser : MonoBehaviour
     [SerializeField] private GameObject prefabLinePathBest;
     [SerializeField] private float delayShowPath = 0.05f;
     [SerializeField] private int showedImages = 5;
+    [SerializeField] private FinalCameraPos finalCameraPos;
     int idBest = -1;
 
     private void Awake()
@@ -127,6 +128,7 @@ public class PathPlayerAnalyser : MonoBehaviour
         {
             _lineRenderer.positionCount = _i + 1;
             _lineRenderer.SetPosition(_i, _segment);
+            _lineRenderer.widthMultiplier = finalCameraPos.finalOrthographicSize / 40;
             if (_i % showedImages == 0)
                 yield return new WaitForSeconds(delayShowPath);
             _i++;

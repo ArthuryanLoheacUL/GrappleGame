@@ -10,8 +10,7 @@ public class GameManager : MonoBehaviour
     float bestTime = 0f;
 
     bool isWin = false;
-    [SerializeField] GameObject looseWindow;
-    [SerializeField] GameObject winWindow;
+    [SerializeField] GameObject gameOverWindow;
 
     private void Awake()
     {
@@ -37,8 +36,7 @@ public class GameManager : MonoBehaviour
             timerManager.SetBestTimeText(bestTime);
             timerManager.StartTimer();
         }
-        winWindow.SetActive(false);
-        looseWindow.SetActive(false);
+        gameOverWindow.SetActive(false);
     }
 
     void Update()
@@ -48,8 +46,7 @@ public class GameManager : MonoBehaviour
             timerInGameOver += Time.deltaTime;
             if (timerInGameOver >= 1f)
             {
-                looseWindow.SetActive(!isWin);
-                winWindow.SetActive(isWin);
+                gameOverWindow.SetActive(true);
             }
         }
 

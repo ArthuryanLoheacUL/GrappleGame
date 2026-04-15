@@ -496,7 +496,7 @@ MonoBehaviour:
   levels:
   - name: Tutorial
     scene: Level1
-  - name: Tutorial
+  - name: Start Line
     scene: Level2
   prefabLevel: {fileID: 4368586242407951584, guid: c00e7a9d70caf9d4e84892d6b3949801, type: 3}
 --- !u!114 &907889811

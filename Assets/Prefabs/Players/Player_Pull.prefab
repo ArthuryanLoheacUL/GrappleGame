@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6201339509050307468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Firepoint_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5398631758920406277}
   - component: {fileID: 6977067389432453937}
   - component: {fileID: 4089024714025234031}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RopePull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 3415404278056043192}
   - component: {fileID: 2372001128057987090}
   - component: {fileID: 7277005186926016268}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 4378103810928205337}
   - component: {fileID: 5461075805211686132}
   - component: {fileID: 5652960759291723147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_Pull
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -546,18 +546,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 7509695214344571857}
   - component: {fileID: 5287006418188875021}
   - component: {fileID: 1142284795921501393}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 8115381517080987063}
   - component: {fileID: 7590177684505007706}
   - component: {fileID: 3933134600973625804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmokeTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5841,7 +5841,7 @@ GameObject:
   - component: {fileID: 8544461741973772219}
   - component: {fileID: 8380307969601765850}
   - component: {fileID: 4794869624177157537}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

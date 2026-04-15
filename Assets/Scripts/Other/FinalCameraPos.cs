@@ -8,7 +8,7 @@ public class FinalCameraPos : MonoBehaviour
 
     [Header("Final Pos")]
     [SerializeField] private Vector2 finalPosition = Vector2.zero;
-    [SerializeField] private float finalOrthographicSize = 0f;
+    [SerializeField] public float finalOrthographicSize = 0f;
 
     [Header("Animation")]
     [SerializeField] private float animationTime = 1.5f;

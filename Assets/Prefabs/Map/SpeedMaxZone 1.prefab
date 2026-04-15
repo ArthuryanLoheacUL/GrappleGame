@@ -5145,7 +5145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b1fdff62fe0824eb5d161fe376da80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speedBoost: 100
+  speedBoost: 200
   directionBoost: {x: -1, y: 0}
 --- !u!1 &9179969764819151308
 GameObject:
