@@ -50,8 +50,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if ((Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1)) && !inGame && timerInGameOver > 1f
-            || Input.GetKeyUp(KeyCode.R)) 
+        if (Input.GetKeyUp(KeyCode.R))
         {
             Restart();
         }

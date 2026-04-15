@@ -1,6 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PathPlayerAnalyser : MonoBehaviour
@@ -21,7 +23,7 @@ public class PathPlayerAnalyser : MonoBehaviour
     [SerializeField] private GameObject prefabLinePathBest;
     [SerializeField] private float delayShowPath = 0.05f;
     [SerializeField] private int showedImages = 5;
-    [SerializeField] private FinalCameraPos finalCameraPos;
+    private FinalCameraPos finalCameraPos;
     int idBest = -1;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     private void Start()
     {
+        finalCameraPos = GameObject.FindGameObjectWithTag("CineCam").GetComponent<FinalCameraPos>();
         LoadBestSave();
     }
 
@@ -105,6 +108,7 @@ public class PathPlayerAnalyser : MonoBehaviour
     {
         if (recording)
             StopRecording();
+        finalCameraPos = GameObject.FindGameObjectWithTag("CineCam").GetComponent<FinalCameraPos>();
 
         for (int _i = 0; _i < positions.Count; _i++)
         {
