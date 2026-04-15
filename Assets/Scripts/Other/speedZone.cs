@@ -5,11 +5,18 @@ public class SpeedZone : MonoBehaviour
     [SerializeField] float speedBoost = 2f;
     [SerializeField] Vector2 directionBoost = Vector2.left;
 
+    bool isInZone = false;
+
     private void OnTriggerStay2D(Collider2D _collision)
     {
         if (_collision.tag == "Player" && _collision.bounds.Contains(_collision.transform.position))
         {
             SpeedBoostPlayer(_collision.gameObject);
+            if (!isInZone)
+            {
+                isInZone = true;
+                SoundManager.instance.PlayOneShot("SpeedBoost", 9, 0.1f);
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D _collision)
@@ -17,9 +24,22 @@ public class SpeedZone : MonoBehaviour
         if (_collision.tag == "Player" && _collision.bounds.Contains(_collision.transform.position))
         {
             SpeedBoostPlayer(_collision.gameObject);
+            if (!isInZone)
+            {
+                isInZone = true;
+                SoundManager.instance.PlayOneShot("SpeedBoost", 9, 0.1f);
+            }
         }
     }
-    
+
+    private void OnTriggerExit2D(Collider2D _collision)
+    {
+        if (_collision.tag == "Player" && isInZone)
+        {
+            isInZone = false;
+        }
+    }
+
     void SpeedBoostPlayer(GameObject _gameObject)
     {
         Rigidbody2D _rb = _gameObject.GetComponent<Rigidbody2D>();

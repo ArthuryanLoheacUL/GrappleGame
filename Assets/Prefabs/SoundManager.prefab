@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7280469703915078566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 958712981931247671}
+  - component: {fileID: 563693283755573345}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &958712981931247671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280469703915078566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.26406, y: -7.88241, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563693283755573345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280469703915078566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f791dde18a152d24886607ea6967be2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  sounds:
+  - name: Finish
+    clip: {fileID: 8300000, guid: da092173b9c0b6e4a883dc4377982331, type: 3}
+    volume: 0.5
+    pitch: 1
+  - name: Explode
+    clip: {fileID: 8300000, guid: 8ab76e6978f03b9468b505654d68333a, type: 3}
+    volume: 0.25
+    pitch: 1
+  - name: Charging
+    clip: {fileID: 8300000, guid: bc398c47b0546f149a6f9fbb12d76a55, type: 3}
+    volume: 0.25
+    pitch: 1
+  - name: ChainRelease
+    clip: {fileID: 8300000, guid: 0cd850f1f4f9268499bcfd3befbf0be5, type: 3}
+    volume: 0.02
+    pitch: 1
+  - name: WebPull
+    clip: {fileID: 8300000, guid: e57b67b8151e9ca48af4af7cbd33a67f, type: 3}
+    volume: 0.1
+    pitch: 1
+  - name: Grab
+    clip: {fileID: 8300000, guid: c98219d174585984bb9e53bc5042f15f, type: 3}
+    volume: 0.1
+    pitch: 1
+  - name: Shoot
+    clip: {fileID: 8300000, guid: af809dc284d5f81499293c30801ff367, type: 3}
+    volume: 0.1
+    pitch: 1
+  - name: Cling1
+    clip: {fileID: 8300000, guid: 5c26d6b8dfdb4164fa6bcfe526c70fce, type: 3}
+    volume: 0.02
+    pitch: 1
+  - name: Cling2
+    clip: {fileID: 8300000, guid: 50df37d6a660ced4f8e61111d4eedc4b, type: 3}
+    volume: 0.02
+    pitch: 1
+  - name: Cling3
+    clip: {fileID: 8300000, guid: 74e3ac9b781f5f242b5e5be1e3dd48fe, type: 3}
+    volume: 0.02
+    pitch: 1
+  - name: SpeedBoost
+    clip: {fileID: 8300000, guid: 180c0fefcf4913c41b8c0ef55539edcc, type: 3}
+    volume: 0.1
+    pitch: 1
