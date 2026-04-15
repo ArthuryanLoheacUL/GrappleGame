@@ -5,6 +5,7 @@ public class ActivePlayer : MonoBehaviour
     [SerializeField] private GameObject[] toDesactivate;
     [SerializeField] private FinalCameraPos finalCameraPos;
     [SerializeField] private GameObject prefabExplosion;
+    [SerializeField] private GunScript[] guns;
 
     private void OnDisable()
     {

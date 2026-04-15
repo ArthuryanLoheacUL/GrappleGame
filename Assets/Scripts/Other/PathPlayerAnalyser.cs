@@ -7,6 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class PathPlayerAnalyser : MonoBehaviour
 {
+    public struct Frame
+    {
+        public Vector2 pos;
+        public bool isGrabbed;
+        public Vector2 posGrabbed;
+    }
+
     public static PathPlayerAnalyser instance;
 
     [Header("Captures Params")]
@@ -14,8 +21,8 @@ public class PathPlayerAnalyser : MonoBehaviour
     private Transform player;
     private bool recording = false;
     private float timerImages = 0;
-    private List<Vector2> current_positions = new List<Vector2>();
-    private List<List<Vector2>> positions = new List<List<Vector2>>();
+    private List<Frame> current_positions = new List<Frame>();
+    private List<List<Frame>> positions = new List<List<Frame>>();
 
     [Header("Show Params")]
     [SerializeField] private GameObject prefabLinePath;
@@ -31,6 +38,7 @@ public class PathPlayerAnalyser : MonoBehaviour
     private GameObject playerGhost;
     private bool isActive = true;
     private Vector2 targetPos;
+    private bool isGrabbed = false;
     private Vector2 prevPos;
     private float timerLerp = 0;
 
@@ -73,7 +81,7 @@ public class PathPlayerAnalyser : MonoBehaviour
             return;
         TakeImage();
         recording = false;
-        positions.Add(new List<Vector2>(current_positions));
+        positions.Add(new List<Frame>(current_positions));
         if (_isBest)
         {
             idBest = positions.Count - 1;
@@ -83,7 +91,7 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     public void ClearImages()
     {
-        current_positions = new List<Vector2>();
+        current_positions = new List<Frame>();
     }
 
     public void ClearPaths()
@@ -118,17 +126,33 @@ public class PathPlayerAnalyser : MonoBehaviour
         timerLerp += Time.deltaTime;
         if (positions[idBest] != null && current_positions.Count < positions[idBest].Count && current_positions.Count > 0)
         {
-            if (targetPos != positions[idBest][current_positions.Count - 1])
+            if (targetPos != positions[idBest][current_positions.Count - 1].pos)
             {
                 timerLerp = 0;
                 prevPos = playerGhost.transform.position;
+                isGrabbed = positions[idBest][current_positions.Count - 1].isGrabbed;
+                if (isGrabbed)
+                {
+                    LineRenderer _l = playerGhost.GetComponent<LineRenderer>();
+                    _l.enabled = true;
+                    _l.positionCount = 2;
+                    _l.SetPosition(1, positions[idBest][current_positions.Count - 1].posGrabbed);
+                } else
+                {
+                    playerGhost.GetComponent<LineRenderer>().enabled = false;
+                }
             }
-            targetPos = positions[idBest][current_positions.Count - 1];
+            targetPos = positions[idBest][current_positions.Count - 1].pos;
         } else
         {
             playerGhost.SetActive(false);
         }
         playerGhost.transform.position = Vector2.Lerp(prevPos, targetPos, timerLerp / delayImages);
+        if (isGrabbed)
+        {
+            LineRenderer _l = playerGhost.GetComponent<LineRenderer>();
+            _l.SetPosition(0, playerGhost.transform.position);
+        }
     }
 
     void TakeImage()
@@ -137,7 +161,19 @@ public class PathPlayerAnalyser : MonoBehaviour
             return;
 
         timerImages = 0;
-        current_positions.Add(player.position);
+        Frame _frame = new Frame();
+        _frame.pos = player.position;
+        _frame.isGrabbed = false;
+        GunScript[] _guns = player.GetComponentsInChildren<GunScript>();
+        foreach (GunScript _gun in _guns)
+        {
+            if (_gun.IsGrabbed())
+            {
+                _frame.isGrabbed = true;
+                _frame.posGrabbed = _gun.grappledPoint;
+            }
+        }
+        current_positions.Add(_frame);
     }
 
     public void ShowPath()
@@ -158,16 +194,16 @@ public class PathPlayerAnalyser : MonoBehaviour
         }
     }
 
-    IEnumerator ProgressiveShow(List<Vector2> _positions, GameObject _prefab)
+    IEnumerator ProgressiveShow(List<Frame> _positions, GameObject _prefab)
     {
         GameObject _linePath = Instantiate(_prefab, transform);
         LineRenderer _lineRenderer = _linePath.GetComponent<LineRenderer>();
 
         int _i = 0;
-        foreach (Vector2 _segment in _positions)
+        foreach (Frame _segment in _positions)
         {
             _lineRenderer.positionCount = _i + 1;
-            _lineRenderer.SetPosition(_i, _segment);
+            _lineRenderer.SetPosition(_i, _segment.pos);
             _lineRenderer.widthMultiplier = finalCameraPos.finalOrthographicSize / 40;
             if (_i % showedImages == 0)
                 yield return new WaitForSeconds(delayShowPath);
@@ -185,12 +221,15 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     void PlayerSaveBest()
     {
-        List<Vector2> _pos = positions[idBest];
+        List<Frame> _pos = positions[idBest];
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_PB_Count", _pos.Count);
         for (int _i = 0; _i < _pos.Count; _i++)
         {
-            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_x", _pos[_i].x);
-            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_y", _pos[_i].y);
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_x", _pos[_i].pos.x);
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_y", _pos[_i].pos.y);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_grabbed", _pos[_i].isGrabbed ? 1 : 0);
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_x", _pos[_i].posGrabbed.x);
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_y", _pos[_i].posGrabbed.y);
         }
     }
 
@@ -204,15 +243,18 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     void LoadBestSave()
     {
-        List<Vector2> _pos = new List<Vector2>();
+        List<Frame> _pos = new List<Frame>();
         int _c = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_PB_Count", -1);
         CreateGhost();
         for (int  _i = 0; _i < _c; _i++)
         {
-            Vector2 _point;
-            _point.x = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_x", 0);
-            _point.y = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_y", 0);
-            _pos.Add( _point );
+            Frame _frame = new Frame();
+            _frame.pos.x = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_x", 0);
+            _frame.pos.y = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_y", 0);
+            _frame.isGrabbed = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_grabbed", 0) == 1;
+            _frame.posGrabbed.x = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_x", 0);
+            _frame.posGrabbed.y = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_y", 0);
+            _pos.Add(_frame);
         }
         positions.Add(_pos);
         idBest = positions.Count - 1;

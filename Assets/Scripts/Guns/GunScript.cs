@@ -36,6 +36,11 @@ abstract public class GunScript : MonoBehaviour
             _viewportPos.y >= 0 && _viewportPos.y <= 1;
     }
 
+    public bool IsGrabbed()
+    {
+        return isGrappled && isActive && !isGrappedToNothing;
+    }
+
     RaycastHit2D GetSnappedShoot(Vector2 _direction)
     {
         float[] _angles = { -5, -4, -3, -2, -1, 1, 2, 3, 4, 5 };
