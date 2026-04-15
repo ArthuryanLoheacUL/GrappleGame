@@ -26,6 +26,15 @@ public class PathPlayerAnalyser : MonoBehaviour
     private FinalCameraPos finalCameraPos;
     int idBest = -1;
 
+    [Header("Ghost")]
+    [SerializeField] private GameObject ghostPrefab;
+    private GameObject playerGhost;
+    private bool isActive = true;
+    private Vector2 targetPos;
+    private Vector2 prevPos;
+    private float timerLerp = 0;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -52,7 +61,10 @@ public class PathPlayerAnalyser : MonoBehaviour
     public void StartNewRecording()
     {
         ClearImages();
+        if (idBest == -1)
+            LoadBestSave();
         StartRecording();
+        CreateGhost();
     }
 
     public void StopRecording(bool _isBest = false)
@@ -77,6 +89,7 @@ public class PathPlayerAnalyser : MonoBehaviour
     public void ClearPaths()
     {
         positions.Clear();
+        idBest = -1;
         ClearImages();
     }
 
@@ -93,6 +106,29 @@ public class PathPlayerAnalyser : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
         }
+        if (playerGhost)
+        {
+            UpdateGhost();
+        }
+    }
+
+    void UpdateGhost()
+    {
+        playerGhost.SetActive(isActive);
+        timerLerp += Time.deltaTime;
+        if (positions[idBest] != null && current_positions.Count < positions[idBest].Count && current_positions.Count > 0)
+        {
+            if (targetPos != positions[idBest][current_positions.Count - 1])
+            {
+                timerLerp = 0;
+                prevPos = playerGhost.transform.position;
+            }
+            targetPos = positions[idBest][current_positions.Count - 1];
+        } else
+        {
+            playerGhost.SetActive(false);
+        }
+        playerGhost.transform.position = Vector2.Lerp(prevPos, targetPos, timerLerp / delayImages);
     }
 
     void TakeImage()
@@ -158,12 +194,19 @@ public class PathPlayerAnalyser : MonoBehaviour
         }
     }
 
+    void CreateGhost()
+    {
+        if (playerGhost == null)
+            playerGhost = Instantiate(ghostPrefab);
+        else
+            playerGhost.SetActive(true);
+    }
+
     void LoadBestSave()
     {
         List<Vector2> _pos = new List<Vector2>();
         int _c = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_PB_Count", -1);
-        if (_c == -1)
-            return;
+        CreateGhost();
         for (int  _i = 0; _i < _c; _i++)
         {
             Vector2 _point;
