@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
         }
         inTransition = true;
         timer = 0;
+        SoundManager.instance.PlayOneShot("Swoosh", 10);
         CreateNext(deltaMove);
         Reload();
     }
@@ -110,6 +111,7 @@ public class LevelManager : MonoBehaviour
         }
         inTransition = true;
         timer = 0;
+        SoundManager.instance.PlayOneShot("Swoosh", 10);
         CreateNext(-deltaMove);
         Reload();
     }

@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.29411766, b: 0.3254902, a: 1}
+  m_Color: {r: 0.23819642, g: 0.23718405, b: 0.24528301, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -876,6 +876,7 @@ GameObject:
   - component: {fileID: 7627879871092713281}
   - component: {fileID: 1629868663960815469}
   - component: {fileID: 3306047881172804762}
+  - component: {fileID: 910665019580689006}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -1009,6 +1010,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71515fc1767aba146b7c16e8fd3481f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonGoToMenu
+--- !u!114 &910665019580689006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874838918654772186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbac474e55fa48e4aa4ba57b63ee4286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAudio
 --- !u!1 &1945823695833200316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1148,7 @@ GameObject:
   - component: {fileID: 1344676901862102920}
   - component: {fileID: 4041425809587433134}
   - component: {fileID: 6843276376778357339}
+  - component: {fileID: 7864652628137490929}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -1268,6 +1282,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71515fc1767aba146b7c16e8fd3481f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonGoToMenu
+--- !u!114 &7864652628137490929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316916723140467354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbac474e55fa48e4aa4ba57b63ee4286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAudio
 --- !u!1 &2490855707065482451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,7 +1805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.29411766, b: 0.3254902, a: 1}
+  m_Color: {r: 0.23819642, g: 0.23718405, b: 0.24528301, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2799,6 +2825,7 @@ GameObject:
   - component: {fileID: 4314177396835707358}
   - component: {fileID: 6697793329360728835}
   - component: {fileID: 3229524475231414459}
+  - component: {fileID: 1398199499339274065}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2932,6 +2959,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71515fc1767aba146b7c16e8fd3481f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonGoToMenu
+--- !u!114 &1398199499339274065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6587708120079766049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbac474e55fa48e4aa4ba57b63ee4286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAudio
 --- !u!1 &7833252607206459564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +3015,7 @@ GameObject:
   - component: {fileID: 6194590131009884704}
   - component: {fileID: 3531365374603915633}
   - component: {fileID: 5523937177114415423}
+  - component: {fileID: 2922575713442632305}
   m_Layer: 5
   m_Name: ClickToRestart
   m_TagString: Untagged
@@ -3102,6 +3142,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2922575713442632305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769339853362812213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670da54e874c10d458f490a62683147f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &8818323650622561581
 GameObject:
   m_ObjectHideFlags: 0

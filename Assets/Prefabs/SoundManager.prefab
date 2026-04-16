@@ -97,3 +97,15 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: cc699923e1d714c4d81ff12a62206c08, type: 3}
     volume: 0.3
     pitch: 1
+  - name: Click
+    clip: {fileID: 8300000, guid: e7313ce60226bb94aab59eee4a7b4734, type: 3}
+    volume: 0.3
+    pitch: 1
+  - name: Swoosh
+    clip: {fileID: 8300000, guid: 39bd4dad1cd3a994c95539f8421c589d, type: 3}
+    volume: 0.05
+    pitch: 0.8
+  - name: Hover
+    clip: {fileID: 8300000, guid: 2b48ac1a02605c442a97ae8c93d66f71, type: 3}
+    volume: 0.2
+    pitch: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CountDown : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class CountDown : MonoBehaviour
             {
                 Time.timeScale = 1;
                 textCountDown.enabled = false;
+                PlayerPrefs.SetFloat("Tries_" + SceneManager.GetActiveScene().name, PlayerPrefs.GetFloat("Tries_" + SceneManager.GetActiveScene().name, 0) + 1);
                 enabled = false;
             }
             StartCoroutine(ActiveInX(durationNextNumber / 5, number > 0));
