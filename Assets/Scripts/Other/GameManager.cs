@@ -6,8 +6,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [HideInInspector] public bool inGame = true;
     [SerializeField] private TimerManager timerManager;
+    [SerializeField] private GameObject pauseWindow;
     float timerInGameOver = 0f;
     float bestTime = 0f;
+    [HideInInspector] public bool inPause = false;
+    float prevScale = 1f;
 
     bool isWin = false;
     [SerializeField] GameObject gameOverWindow;
@@ -19,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        inPause = false;
+        pauseWindow.SetActive(false);
         timerInGameOver = 0f;
         PathPlayerAnalyser.instance.StopRecording();
         PathPlayerAnalyser.instance.HidePath();
@@ -37,6 +42,8 @@ public class GameManager : MonoBehaviour
             timerManager.StartTimer();
         }
         gameOverWindow.SetActive(false);
+        pauseWindow.SetActive(false);
+        inPause = false;
     }
 
     void Update()
@@ -53,6 +60,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.R))
         {
             Restart();
+        }
+
+        if (inGame && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
         }
     }
 
@@ -77,5 +89,17 @@ public class GameManager : MonoBehaviour
             }
         }
         PathPlayerAnalyser.instance.StopRecording(_isPB);
+    }
+
+    public void Pause()
+    {
+        if (inGame)
+        {
+            inPause = !inPause;
+            pauseWindow.SetActive(inPause);
+            if (inPause)
+                prevScale = Time.timeScale;
+            Time.timeScale = inPause ? 0f : prevScale;
+        }
     }
 }

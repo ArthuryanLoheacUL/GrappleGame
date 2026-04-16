@@ -29,6 +29,8 @@ public class CountDown : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.inPause)
+            return;
         timer += Time.unscaledDeltaTime;
 
         if (timer >= durationNextNumber)

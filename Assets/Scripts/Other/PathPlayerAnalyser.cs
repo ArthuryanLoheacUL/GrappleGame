@@ -122,7 +122,10 @@ public class PathPlayerAnalyser : MonoBehaviour
     {
         playerGhost.SetActive(isActive);
         timerLerp += Time.deltaTime;
-        if (positions[idBest] != null && current_positions.Count < positions[idBest].Count && current_positions.Count > 0)
+        if (positions.Count >= idBest && idBest != -1 &&
+            positions[idBest].Count > 0 &&
+            current_positions.Count > 0 &&
+            current_positions.Count < positions[idBest].Count)
         {
             if (targetPos != positions[idBest][current_positions.Count - 1].pos)
             {
