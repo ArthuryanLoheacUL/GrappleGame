@@ -57,6 +57,13 @@ public class GunPull : GunScript
         Vector2 _velocity = rb.linearVelocity;
         float _opposition = (1 - Vector3.Dot(_velocity.normalized, _directionPull.normalized)) / 2f;
         float _volume = _opposition * SoundManager.instance.GetVolumeSound("WebPull") + SoundManager.instance.GetVolumeSound("WebPull") * 0.25f;
+        if (!GameManager.instance.inGame)
+            _volume = 0;
         SoundManager.instance.SetVolumeCanal(CANAL, _volume);
+    }
+
+    private void OnDisable()
+    {
+        SoundManager.instance.SetVolumeCanal(CANAL, 0);
     }
 }

@@ -49,7 +49,8 @@ MonoBehaviour:
   musics:
   - name: Game
     audioclip: {fileID: 8300000, guid: c99aac4d363e1ae4c84a93b5e6ac40fd, type: 3}
-    volume: 0.2
+    volume: 0.1
   - name: Menu
     audioclip: {fileID: 8300000, guid: fcfe96592734bf645b7a0f7f3675fa49, type: 3}
-    volume: 0.2
+    volume: 0.1
+  volume: 0.4

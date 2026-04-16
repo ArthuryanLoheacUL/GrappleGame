@@ -63,7 +63,7 @@ MonoBehaviour:
     pitch: 1
   - name: WebPull
     clip: {fileID: 8300000, guid: e57b67b8151e9ca48af4af7cbd33a67f, type: 3}
-    volume: 0.1
+    volume: 0.15
     pitch: 1
   - name: Grab
     clip: {fileID: 8300000, guid: c98219d174585984bb9e53bc5042f15f, type: 3}

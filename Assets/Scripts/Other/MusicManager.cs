@@ -17,6 +17,8 @@ public class MusicManager : MonoBehaviour
     [HideInInspector] public string currentMusic;
     [SerializeField] private Music[] musics;
 
+    [Range(0, 2f)] public float volume;
+
     AudioSource source;
 
     private void Awake()
@@ -49,7 +51,7 @@ public class MusicManager : MonoBehaviour
             {
                 source.Stop();
                 source.clip = _music.audioclip;
-                source.volume = _music.volume;
+                source.volume = _music.volume * volume;
                 source.Play();
                 currentMusic = _music.name;
             }
