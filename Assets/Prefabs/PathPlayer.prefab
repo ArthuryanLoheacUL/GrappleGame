@@ -50,3 +50,4 @@ MonoBehaviour:
   prefabLinePathBest: {fileID: 5255918238906733959, guid: 14d8ffe341a290040a26fc713deb4609, type: 3}
   delayShowPath: 0.05
   showedImages: 5
+  ghostPrefab: {fileID: 3485767780824143573, guid: fb7e1ad9334b5aa47a5d2e6dcac9d3a6, type: 3}

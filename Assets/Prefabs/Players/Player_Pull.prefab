@@ -639,6 +639,7 @@ MonoBehaviour:
   - {fileID: 8275422423781750898}
   finalCameraPos: {fileID: 0}
   prefabExplosion: {fileID: 5512710540585398210, guid: e597e2d5794d7334bac7c1cbdfc03905, type: 3}
+  guns: []
 --- !u!1 &7621651918346690259
 GameObject:
   m_ObjectHideFlags: 0

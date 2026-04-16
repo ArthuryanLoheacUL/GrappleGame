@@ -89,3 +89,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 180c0fefcf4913c41b8c0ef55539edcc, type: 3}
     volume: 0.1
     pitch: 1
+  - name: Count
+    clip: {fileID: 8300000, guid: eae3f6c4f835be149af17fa1c3c2e7c7, type: 3}
+    volume: 0.3
+    pitch: 1
+  - name: FinalCount
+    clip: {fileID: 8300000, guid: cc699923e1d714c4d81ff12a62206c08, type: 3}
+    volume: 0.3
+    pitch: 1
