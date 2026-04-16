@@ -664,14 +664,6 @@ PrefabInstance:
       propertyPath: playMusic
       value: Menu
       objectReference: {fileID: 0}
-    - target: {fileID: 8062344799634300629, guid: c007ed88626e2ae408dbb204eecf9e7c, type: 3}
-      propertyPath: musics.Array.data[0].volume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8062344799634300629, guid: c007ed88626e2ae408dbb204eecf9e7c, type: 3}
-      propertyPath: musics.Array.data[1].volume
-      value: 0.4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
