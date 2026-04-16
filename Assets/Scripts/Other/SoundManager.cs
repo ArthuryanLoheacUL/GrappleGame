@@ -90,6 +90,8 @@ public class SoundManager : MonoBehaviour
     public void PlayOneShot(string _name, int _canal, float _rangePitch = 0f)
     {
         AudioSource _audioSource = GetCanal(_canal);
+        if (!_audioSource)
+            return;
         Sound _s;
         if (!GetSound(_name, out _s))
             return;
@@ -99,6 +101,8 @@ public class SoundManager : MonoBehaviour
     public void PlayCanal(string _name, int _canal, bool _loop = false)
     {
         AudioSource _audioSource = GetCanal(_canal);
+        if (!_audioSource)
+            return;
         Sound _s;
         if (!GetSound(_name, out _s))
             return;
@@ -112,6 +116,8 @@ public class SoundManager : MonoBehaviour
     public void RestartAudioCanal(int _canal)
     {
         AudioSource _audioSource = GetCanal(_canal);
+        if (!_audioSource)
+            return;
         _audioSource.Stop();
         _audioSource.clip = _audioSource.clip;
         _audioSource.Play();
@@ -120,18 +126,21 @@ public class SoundManager : MonoBehaviour
     public void SetVolumeCanal(int _canal, float _volume)
     {
         AudioSource _audioSource = GetCanal(_canal);
-        _audioSource.volume = _volume;
+        if (_audioSource)
+            _audioSource.volume = _volume;
     }
 
     public void SetPitchCanal(int _canal, float _pitch)
     {
         AudioSource _audioSource = GetCanal(_canal);
-        _audioSource.pitch = _pitch;
+        if (_audioSource)
+            _audioSource.pitch = _pitch;
     }
 
     public void StopAudioCanal(int _canal)
     {
         AudioSource _audioSource = GetCanal(_canal);
-        _audioSource.Stop();
+        if (_audioSource)
+            _audioSource.Stop();
     }
 }
