@@ -40,6 +40,7 @@ public class LevelButton : MonoBehaviour
 
     public void GoToScene()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(nameScene);
     }
 }

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         PathPlayerAnalyser.instance.StopRecording();
         PathPlayerAnalyser.instance.HidePath();
         string _currentSceneName = SceneManager.GetActiveScene().name;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(_currentSceneName);
     }
 

@@ -118,6 +118,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartCurrentLevel()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(levels[id].scene);
     }
 }

@@ -7,6 +7,7 @@ public class ButtonGoToMenu : MonoBehaviour
     {
         PathPlayerAnalyser.instance.HidePath();
         PathPlayerAnalyser.instance.ClearPaths();
+        Time.timeScale = 1f;
         SceneManager.LoadScene(_sceneName);
     }
 }

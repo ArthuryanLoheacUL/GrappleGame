@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 4378103810928205337}
   - component: {fileID: 5461075805211686132}
   - component: {fileID: 5652960759291723147}
+  - component: {fileID: 4886330155926558342}
   m_Layer: 8
   m_Name: Player_Pull
   m_TagString: Player
@@ -640,6 +641,19 @@ MonoBehaviour:
   finalCameraPos: {fileID: 0}
   prefabExplosion: {fileID: 5512710540585398210, guid: e597e2d5794d7334bac7c1cbdfc03905, type: 3}
   guns: []
+--- !u!114 &4886330155926558342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788129251792661704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018edd23565c4dd4abc06d7b49af9db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  prefabUIWarning: {fileID: 3523745891625361479, guid: 3c60632eb37393142b643c4f72a4a6a6, type: 3}
 --- !u!1 &7621651918346690259
 GameObject:
   m_ObjectHideFlags: 0

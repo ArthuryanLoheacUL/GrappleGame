@@ -135,23 +135,25 @@ public class PathPlayerAnalyser : MonoBehaviour
             current_positions.Count > 0 &&
             current_positions.Count < positions[idBest].Count)
         {
-            if (targetPos != positions[idBest][current_positions.Count - 1].pos)
+
+            Frame _currentFrame = positions[idBest][current_positions.Count];
+            if (targetPos != _currentFrame.pos)
             {
                 timerLerp = 0;
                 prevPos = playerGhost.transform.position;
-                isGrabbed = positions[idBest][current_positions.Count - 1].isGrabbed;
+                isGrabbed = _currentFrame.isGrabbed;
                 if (isGrabbed)
                 {
                     LineRenderer _l = playerGhost.GetComponent<LineRenderer>();
                     _l.enabled = true;
                     _l.positionCount = 2;
-                    _l.SetPosition(1, positions[idBest][current_positions.Count - 1].posGrabbed);
+                    _l.SetPosition(1, _currentFrame.posGrabbed);
                 } else
                 {
                     playerGhost.GetComponent<LineRenderer>().enabled = false;
                 }
             }
-            targetPos = positions[idBest][current_positions.Count - 1].pos;
+            targetPos = _currentFrame.pos;
         } else
         {
             playerGhost.SetActive(false);
@@ -254,8 +256,7 @@ public class PathPlayerAnalyser : MonoBehaviour
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_grabbed", _pos[_i].isGrabbed ? 1 : 0);
             PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_x", _pos[_i].posGrabbed.x);
             PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_y", _pos[_i].posGrabbed.y);
-            if (_i % 10 == 0)
-                yield return null;
+            yield return null;
         }
     }
 
