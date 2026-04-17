@@ -30,9 +30,12 @@ public class CountDown : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.inPause)
+        if (GameManager.instance.inPause || (TransitionManager.instance && TransitionManager.instance.IsInTransition()))
             return;
         timer += Time.unscaledDeltaTime;
+        if (Time.timeScale > 0)
+            Time.timeScale = 0;
+
 
         if (timer >= durationNextNumber)
         {
