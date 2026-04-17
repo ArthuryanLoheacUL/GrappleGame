@@ -46,8 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   delayImages: 0.05
   prefabLinePath: {fileID: 5255918238906733959, guid: becc4bb220c26f345a7eae683887bbae, type: 3}
+  linePathColor: {r: 0.40392157, g: 0.40784314, b: 0.43529412, a: 1}
   prefabLinePathCurrent: {fileID: 5255918238906733959, guid: 073f6ff0305cc5745ada1827cc7815e0, type: 3}
+  linePathCurrentColor: {r: 0.4862745, g: 1, b: 1, a: 1}
   prefabLinePathBest: {fileID: 5255918238906733959, guid: 14d8ffe341a290040a26fc713deb4609, type: 3}
+  linePathBestColor: {r: 0.95294124, g: 0.654902, b: 0.5294118, a: 1}
+  prefabCross: {fileID: 1922792173336250593, guid: 8b8e32fcacad0dc4f94291aa3cf7fefa, type: 3}
   delayShowPath: 0.05
   showedImages: 5
   ghostPrefab: {fileID: 3485767780824143573, guid: fb7e1ad9334b5aa47a5d2e6dcac9d3a6, type: 3}

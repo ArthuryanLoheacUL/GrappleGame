@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                 _isPB = true;
             }
         }
-        PathPlayerAnalyser.instance.StopRecording(_isPB);
+        PathPlayerAnalyser.instance.StopRecording(_isPB, !_isWin);
     }
 
     public void Pause()

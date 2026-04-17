@@ -10,6 +10,7 @@ public class PathPlayerAnalyser : MonoBehaviour
         public Vector2 pos;
         public bool isGrabbed;
         public Vector2 posGrabbed;
+        public bool dead;
     }
 
     public static PathPlayerAnalyser instance;
@@ -24,8 +25,15 @@ public class PathPlayerAnalyser : MonoBehaviour
 
     [Header("Show Params")]
     [SerializeField] private GameObject prefabLinePath;
+    [SerializeField] private Color linePathColor;
+
     [SerializeField] private GameObject prefabLinePathCurrent;
+    [SerializeField] private Color linePathCurrentColor;
+
     [SerializeField] private GameObject prefabLinePathBest;
+    [SerializeField] private Color linePathBestColor;
+    
+    [SerializeField] private GameObject prefabCross;
     [SerializeField] private float delayShowPath = 0.05f;
     [SerializeField] private int showedImages = 5;
     private FinalCameraPos finalCameraPos;
@@ -73,17 +81,17 @@ public class PathPlayerAnalyser : MonoBehaviour
         CreateGhost();
     }
 
-    public void StopRecording(bool _isBest = false)
+    public void StopRecording(bool _isBest = false, bool _death = false)
     {
         if (!recording)
             return;
-        TakeImage();
+        TakeImage(_death);
         recording = false;
         positions.Add(new List<Frame>(current_positions));
         if (_isBest)
         {
             idBest = positions.Count - 1;
-            PlayerSaveBest(positions[idBest]);
+            StartCoroutine(PlayerSaveBest(positions[idBest]));
         }
     }
 
@@ -156,7 +164,7 @@ public class PathPlayerAnalyser : MonoBehaviour
         }
     }
 
-    void TakeImage()
+    void TakeImage(bool _death = false)
     {
         if (!player)
             return;
@@ -165,6 +173,7 @@ public class PathPlayerAnalyser : MonoBehaviour
         Frame _frame = new Frame();
         _frame.pos = player.position;
         _frame.isGrabbed = false;
+        _frame.dead = _death;
         GunScript[] _guns = player.GetComponentsInChildren<GunScript>();
         foreach (GunScript _gun in _guns)
         {
@@ -186,16 +195,23 @@ public class PathPlayerAnalyser : MonoBehaviour
         for (int _i = 0; _i < positions.Count; _i++)
         {
             GameObject _prefab = prefabLinePath;
+            Color _colorCross = linePathColor;
             if (_i == positions.Count - 1)
+            {
                 _prefab = prefabLinePathCurrent;
+                _colorCross = linePathCurrentColor;
+            }
             else if (_i == idBest)
+            {
                 _prefab = prefabLinePathBest;
+                _colorCross = linePathBestColor;
+            }
 
-            StartCoroutine(ProgressiveShow(positions[_i], _prefab));
+            StartCoroutine(ProgressiveShow(positions[_i], _prefab, _colorCross));
         }
     }
 
-    IEnumerator ProgressiveShow(List<Frame> _positions, GameObject _prefab)
+    IEnumerator ProgressiveShow(List<Frame> _positions, GameObject _prefab, Color _colorCross)
     {
         GameObject _linePath = Instantiate(_prefab, transform);
         LineRenderer _lineRenderer = _linePath.GetComponent<LineRenderer>();
@@ -206,6 +222,14 @@ public class PathPlayerAnalyser : MonoBehaviour
             _lineRenderer.positionCount = _i + 1;
             _lineRenderer.SetPosition(_i, _segment.pos);
             _lineRenderer.widthMultiplier = finalCameraPos.finalOrthographicSize / 40;
+            if (_segment.dead)
+            {
+                GameObject _cross = Instantiate(prefabCross, _linePath.transform);
+                _cross.transform.position = _segment.pos;
+                _cross.transform.localScale = new Vector3(_lineRenderer.widthMultiplier, _lineRenderer.widthMultiplier, _lineRenderer.widthMultiplier) / 1.5f;
+                _cross.GetComponent<SpriteRenderer>().color = _colorCross;
+            }
+
             if (_i % showedImages == 0)
                 yield return new WaitForSeconds(delayShowPath);
             _i++;
