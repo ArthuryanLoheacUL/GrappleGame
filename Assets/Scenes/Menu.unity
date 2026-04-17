@@ -1337,7 +1337,7 @@ MonoBehaviour:
   levels:
   - name: Tutorial
     scene: Level1
-    sprite: {fileID: -5174634990874348381, guid: 886e513c44323e249907da4fafea162f, type: 3}
+    sprite: {fileID: -6470460504253458178, guid: 75338ffd66d5da54f9120d68659a4643, type: 3}
   - name: Start Line
     scene: Level2
     sprite: {fileID: -5904907779889712954, guid: a38eeaa92ee2bf64d8de32d2b8596936, type: 3}
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   prefabLevel: {fileID: 1853679871938326622, guid: c00e7a9d70caf9d4e84892d6b3949801, type: 3}
   levelPage:
   - {fileID: 800731225}
-  deltaMove: 800
+  deltaMove: -800
   animationTime: 0.5
   animationCurve:
     serializedVersion: 2
@@ -1940,11 +1940,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 800731226}
   - {fileID: 907889809}
   - {fileID: 175120874}
   - {fileID: 828906799}
   - {fileID: 2068368432}
-  - {fileID: 800731226}
   - {fileID: 526347959}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

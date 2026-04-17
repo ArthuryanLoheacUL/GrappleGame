@@ -83,7 +83,7 @@ public class PathPlayerAnalyser : MonoBehaviour
         if (_isBest)
         {
             idBest = positions.Count - 1;
-            PlayerSaveBest();
+            PlayerSaveBest(positions[idBest]);
         }
     }
 
@@ -220,9 +220,8 @@ public class PathPlayerAnalyser : MonoBehaviour
             Destroy(transform.GetChild(_i).gameObject);
     }
 
-    void PlayerSaveBest()
+    IEnumerator PlayerSaveBest(List<Frame> _pos)
     {
-        List<Frame> _pos = positions[idBest];
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_PB_Count", _pos.Count);
         for (int _i = 0; _i < _pos.Count; _i++)
         {
@@ -231,6 +230,8 @@ public class PathPlayerAnalyser : MonoBehaviour
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_grabbed", _pos[_i].isGrabbed ? 1 : 0);
             PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_x", _pos[_i].posGrabbed.x);
             PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_PB_" + _i.ToString() + "_PG_y", _pos[_i].posGrabbed.y);
+            if (_i % 10 == 0)
+                yield return null;
         }
     }
 
